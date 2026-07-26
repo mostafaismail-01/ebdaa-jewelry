@@ -69,12 +69,24 @@
   --silver:#B8B8B3;
   --copper:#9A6846;
 
-  /* derived, all AA against ivory */
+  /* Round 2: the page was one flat ivory from top to bottom, which is most of
+     what read as "pale". These two surfaces band the sections instead. */
+  --sand:#EDE5D8;          /* deeper warm surface — How to order, Contact */
+  --copper-band:#F0E1D4;   /* Wholesale only: the one section that is an aside */
+
+  /* Round 2: pulled from the turquoise in the pharaonic stones, so the
+     interface colour comes out of the product rather than being decoration. */
+  --turquoise:#2E8B93;        /* 3.5:1 on ivory — rules, dividers, icons only */
+  --turquoise-text:#1F6B72;   /* 5.4:1 ivory, 4.9:1 sand, 6.2:1 under white */
+
+  /* derived */
   --card:#FCFAF5;
-  --muted:#5A574F;      /* 6.4:1 on ivory */
+  --muted:#5A574F;      /* 6.4:1 on ivory, 5.8:1 on sand */
   /* --copper is 4.16:1 on ivory — fine for rules and icons, short of AA for
-     small text. This darker cast is for anything copper that is actually read. */
-  --copper-text:#8F5E3C;   /* 4.8:1 on ivory */
+     small text. This darker cast is for anything copper that is actually read.
+     Round 2 darkened it from #8F5E3C: with three surfaces instead of one it now
+     has to clear AA on sand (4.38 → 4.76) and on the copper band too. */
+  --copper-text:#8A5836;   /* 5.2:1 ivory · 4.8:1 sand · 4.7:1 copper band */
   --line:rgba(36,35,33,.14);
   --line-strong:rgba(36,35,33,.26);
   --lapis-dark:#16293D;
@@ -197,14 +209,21 @@ html[lang="ar"] .wordmark-sub{letter-spacing:.2em}
 
 /* ── Section furniture ──────────────────────────────────────────────── */
 section{scroll-margin-block-start:88px}
-.sec{padding-block:clamp(3rem,7vw,5.5rem)}
-.sec--tint{background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.55)),var(--ivory);border-block:1px solid var(--line)}
+.sec{padding-block:clamp(3rem,7vw,5.5rem);border-block-start:1px solid var(--line)}
+/* Section banding. Ivory is what makes silver read as silver, so the rhythm
+   comes from two warmer surfaces rather than from louder colour. Every
+   text/background pair below clears WCAG AA — see DECISIONS.md for the ratios. */
+.sec--sand{background:var(--sand)}
+.sec--copper{background:var(--copper-band)}
+.sec--sand,.sec--copper{border-block:1px solid var(--line)}
 .eyebrow{
   display:flex;align-items:center;gap:.7rem;
   font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   color:var(--copper-text);margin-block-end:.85rem;
 }
-.eyebrow::after{content:"";flex:1;height:1px;background:var(--line-strong);max-width:80px}
+/* the one rule that is turquoise everywhere: it repeats down the page and ties
+   the interface colour to the stones in the product photos */
+.eyebrow::after{content:"";flex:1;height:2px;background:var(--turquoise);max-width:80px;opacity:.75}
 .sec__h{font-size:clamp(1.65rem,1.3rem + 1.8vw,2.5rem)}
 .sec__sub{color:var(--muted);max-width:56ch;margin-block-start:.9rem;font-size:1.02rem}
 
@@ -235,8 +254,40 @@ html[lang="en"] .hero h1{max-width:14ch}
 .frame img{border-radius:calc(var(--r) - 6px);aspect-ratio:1;object-fit:cover;width:100%;height:auto}
 .frame figcaption{margin-block-start:.7rem;font-size:.78rem;color:var(--muted);text-align:center;line-height:1.5}
 
+/* ── Entry cards ────────────────────────────────────────────────────── */
+/* Not a section split. These pre-apply the design filter and scroll to the
+   grid, which gives the feeling of having sections without forcing every
+   piece into a gender bucket — a name necklace is a name necklace. */
+/* one column below 560px: two grid items with min-width:auto pushed 31px of
+   horizontal scroll onto a 320px phone, and WCAG 1.4.10 says no */
+.entries{display:grid;gap:.85rem;grid-template-columns:1fr;margin-block-start:1.9rem}
+@media (min-width:560px){.entries{grid-template-columns:repeat(2,1fr)}}
+.entry{
+  display:flex;align-items:center;gap:.85rem;
+  min-height:64px;padding:.85rem 1.1rem;text-align:start;
+  /* the label hugs the leading edge; the chevron holds the trailing one */
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  font:inherit;font-weight:700;font-size:1rem;color:var(--charcoal);cursor:pointer;
+  transition:border-color .18s var(--ease),transform .18s var(--ease),background-color .18s var(--ease);
+}
+.entry:hover{border-color:var(--turquoise);transform:translateY(-2px)}
+.entry svg{width:26px;height:26px;flex:none;color:var(--turquoise-text)}
+.entry small{display:block;font-weight:400;font-size:.82rem;color:var(--muted);line-height:1.4}
+.entry > span{min-width:0}
+.entry__go{margin-inline-start:auto;width:20px;height:20px;color:var(--muted)}
+html[dir="rtl"] .entry__go{transform:scaleX(-1)}
+
 /* ── Chips + gallery ────────────────────────────────────────────────── */
-.chips{display:flex;gap:.5rem;overflow-x:auto;padding-block:.35rem;margin-block:1.9rem 2.2rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+/* Two orthogonal axes: type (what it is) then design (what it looks like).
+   AND across the rows, OR within a row. Each row is labelled, otherwise two
+   "All" chips sitting above each other are ambiguous. */
+.filters{margin-block:1.9rem 2.2rem}
+.filter-row + .filter-row{margin-block-start:.9rem}
+.filter-row__k{
+  font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin-block-end:.45rem;
+}
+.chips{display:flex;gap:.5rem;overflow-x:auto;padding-block:.35rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .chips::-webkit-scrollbar{display:none}
 .chip{
   flex:none;min-height:44px;padding:.5rem 1.05rem;
@@ -247,6 +298,9 @@ html[lang="en"] .hero h1{max-width:14ch}
 }
 .chip:hover{background:rgba(36,35,33,.05);border-color:var(--charcoal)}
 .chip[aria-pressed="true"]{background:var(--lapis);border-color:var(--lapis);color:#fff}
+/* the type row is turquoise so an active type chip is never mistaken for an
+   active design chip when both rows have a selection */
+.chips--type .chip[aria-pressed="true"]{background:var(--turquoise-text);border-color:var(--turquoise-text);color:#fff}
 
 .grid{display:grid;gap:28px;grid-template-columns:1fr;list-style:none;margin:0;padding:0}
 @media (min-width:560px){.grid{grid-template-columns:repeat(2,1fr)}}
@@ -268,8 +322,13 @@ html[lang="en"] .hero h1{max-width:14ch}
   transition:transform .35s var(--ease);
 }
 .card:hover .card__media img{transform:scale(1.03)}
-.card__body{display:flex;flex-direction:column;gap:.75rem;padding:1rem 1.1rem 1.15rem;border-block-start:1px solid var(--line)}
-.card__t{font-size:1.02rem;font-weight:600;line-height:1.4}
+/* Round 2 note was "don't put a description under each design". There is no
+   description — this is a one-line title, and it is load-bearing twice: it
+   tells the customer what to ask for, and it is interpolated into the WhatsApp
+   prefill. So it stays, quieter and tighter, and the image dominates the card.
+   Deliberately not hover-only: that breaks touch and screen readers. */
+.card__body{display:flex;flex-direction:column;gap:.3rem;padding:.7rem .85rem .75rem;border-block-start:1px solid var(--line)}
+.card__t{font-size:.92rem;font-weight:500;line-height:1.45;color:var(--muted)}
 .card__cta{
   align-self:flex-start;display:inline-flex;align-items:center;gap:.45em;
   min-height:44px;padding:.4rem 0;
@@ -289,7 +348,8 @@ html[lang="en"] .hero h1{max-width:14ch}
 }
 .card--ask:hover{transform:none;box-shadow:none;border-color:var(--copper)}
 .card--ask p{color:var(--muted);font-size:.97rem}
-.card--ask .card__t{font-size:1.1rem}
+/* the tail card is a heading, not a caption — it keeps the old weight */
+.card--ask .card__t{font-size:1.1rem;font-weight:700;color:var(--charcoal)}
 .card--ask svg.ask-mark{width:34px;height:34px;color:var(--copper);margin-block-end:.2rem}
 .empty{padding:2.5rem 0;color:var(--muted)}
 .empty[hidden]{display:none}
@@ -318,6 +378,48 @@ html[lang="en"] .hero h1{max-width:14ch}
   color:var(--muted);max-width:70ch;
 }
 
+/* ── Sizes ──────────────────────────────────────────────────────────── */
+/* No conversion table and no ring-size number: which sizing convention Emad
+   works in is unconfirmed, and publishing a wrong conversion for a
+   made-to-order ring costs real money. The section teaches the string method
+   and converts circumference to inner diameter, which is geometry rather than
+   a convention. */
+.sizes{display:grid;gap:clamp(1.75rem,4vw,3rem);margin-block-start:2.5rem;align-items:start}
+@media (min-width:820px){.sizes{grid-template-columns:minmax(0,1fr) minmax(0,360px)}}
+.sizes__steps{margin:0;padding:0;list-style:none;display:grid;gap:1rem;counter-reset:z}
+.sizes__steps li{display:flex;gap:.8rem;align-items:flex-start;color:var(--muted)}
+.sizes__steps li::before{
+  counter-increment:z;content:counter(z);
+  flex:none;display:grid;place-items:center;width:28px;height:28px;margin-block-start:.2rem;
+  border-radius:999px;background:var(--turquoise-text);color:#fff;
+  font-size:.85rem;font-weight:700;
+}
+.sizes__dia{width:100%;max-width:340px;margin-block-start:1.5rem;color:var(--turquoise-text)}
+/* the diagram reads finger → ruler, so it mirrors with the text direction; the
+   ruler ticks are symmetrical, so flipping costs nothing */
+html[dir="rtl"] .sizes__dia{transform:scaleX(-1)}
+.calc{
+  padding:1.35rem 1.4rem;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);
+  border-block-start:3px solid var(--turquoise);
+  border-start-start-radius:0;border-start-end-radius:0;
+}
+.calc label{display:block;font-weight:600;font-size:.95rem;margin-block-end:.5rem}
+.calc input{
+  width:100%;min-height:52px;padding:.6rem .9rem;
+  font:inherit;font-size:1.15rem;font-weight:600;color:var(--charcoal);
+  background:var(--ivory);border:1px solid var(--line-strong);border-radius:10px;
+}
+.calc input:focus-visible{outline:3px solid var(--lapis);outline-offset:2px}
+.calc__out{
+  display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  margin-block-start:1.1rem;padding-block-start:1rem;border-block-start:1px solid var(--line);
+}
+.calc__k{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.calc__v{font-size:1.5rem;font-weight:700;color:var(--turquoise-text)}
+.calc__hint{margin-block-start:.6rem;font-size:.85rem;color:var(--muted);min-height:1.3em}
+.calc__note{margin-block-start:1rem;font-size:.88rem;line-height:1.6;color:var(--muted)}
+
 /* ── Services ───────────────────────────────────────────────────────── */
 .svcs{display:grid;gap:1rem;margin-block-start:2.5rem;padding:0;list-style:none;grid-template-columns:repeat(2,1fr)}
 @media (min-width:820px){.svcs{grid-template-columns:repeat(4,1fr);gap:1.25rem}}
@@ -336,6 +438,9 @@ html[lang="en"] .hero h1{max-width:14ch}
   background:var(--card);border:1px solid var(--line);border-radius:calc(var(--r) + 4px);
 }
 @media (min-width:820px){.panel--split{grid-template-columns:1fr auto;gap:2.5rem}}
+/* On the copper band the panel drops its own surface, otherwise the card white
+   covers the tint and the whole point of banding that section is lost. */
+.sec--copper .panel{background:transparent;border-color:rgba(154,104,70,.32)}
 .about__grid{display:grid;gap:clamp(1.75rem,4vw,3rem);align-items:center}
 @media (min-width:860px){.about__grid{grid-template-columns:1fr 1fr}}
 /* The bench photo comes off a compressed Facebook cover, so it is held to a
@@ -418,6 +523,27 @@ body.lb-open .sticky-wa{display:none}
    aspect-ratio never applies. */
 .lb__panel picture{display:block}
 .lb__panel img{width:100%;height:auto;max-width:392px;margin-inline:auto;aspect-ratio:1;object-fit:cover;border-radius:var(--r)}
+
+/* Photo pager — a second axis inside the lightbox, for pieces that have more
+   than one shot (the profile and the inside of a band, say). The side arrows
+   outside the panel keep stepping between styles; these step between the
+   photos of the style you are already looking at. Built only when there is
+   more than one, and it pushes no history entry, so Back still closes. */
+.lb__figure{position:relative}
+.lb__pg{
+  position:absolute;inset-block-start:50%;transform:translateY(-50%);
+  width:40px;height:40px;display:grid;place-items:center;
+  border:0;border-radius:999px;cursor:pointer;
+  background:rgba(36,35,33,.62);color:#fff;
+}
+.lb__pg:hover{background:rgba(36,35,33,.82)}
+.lb__pg svg{width:18px;height:18px}
+.lb__pgPrev{inset-inline-start:8px}
+.lb__pgNext{inset-inline-end:8px}
+html[dir="rtl"] .lb__pg svg{transform:scaleX(-1)}
+.lb__dots{display:flex;justify-content:center;gap:.4rem;margin-block-start:.6rem}
+.lb__dots span{width:7px;height:7px;border-radius:999px;background:var(--line-strong)}
+.lb__dots span[data-on="1"]{background:var(--turquoise-text)}
 .lb__body{padding:1.05rem .4rem .3rem}
 .lb__t{font-size:1.2rem;font-weight:700}
 .lb__d{margin-block-start:.4rem;color:var(--muted);font-size:.93rem}
@@ -448,8 +574,12 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
    Go side-by-side so the CTA is always visible without scrolling. */
 @media (max-height:620px) and (min-width:620px){
   .lb__stage{width:min(720px,100%)}
-  .lb__panel{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:1rem;align-items:start}
+  .lb__panel{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);grid-template-rows:auto auto;gap:.4rem 1rem;align-items:start}
+  .lb__figure{grid-column:1;grid-row:1}
+  .lb__dots{grid-column:1;grid-row:2}
+  .lb__body{grid-column:2;grid-row:1 / span 2}
   .lb__panel img{max-width:220px}
+  .lb__pg{width:34px;height:34px}
   .lb__body{padding:.15rem .4rem .3rem}
   .lb__t{font-size:1.05rem}
   .lb__cta{margin-block-start:.85rem}
@@ -475,10 +605,12 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
    relative. Drop the furniture, keep the styles and the phone number, and
    spell out the WhatsApp number since a tap target means nothing on paper. */
 @media print{
-  .hdr,.nav,.sticky-wa,.lb,.skip,.chips,.hero__cta,.ftr__acts{display:none!important}
+  .hdr,.nav,.sticky-wa,.lb,.skip,.filters,.entries,.hero__cta,.ftr__acts{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   .sec,.hero{padding-block:1rem;border:0}
-  .sec--tint{background:#fff}
+  .sec--sand,.sec--copper{background:#fff}
+  /* the calculator is interactive; on paper the string method is the useful part */
+  .calc{display:none}
   .ftr{background:#fff;color:#000;margin:0;padding-block:1rem;border-block-start:1px solid #999}
   .ftr a,.ftr p{color:#000}
   .grid{grid-template-columns:repeat(3,1fr)!important;gap:10px}
@@ -539,6 +671,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
       <ul class="nav__list">
         <li><a href="#designs"><span class="ar" lang="ar">التصاميم</span><span class="en" lang="en">Designs</span></a></li>
         <li><a href="#order"><span class="ar" lang="ar">إزاي تطلب</span><span class="en" lang="en">How to order</span></a></li>
+        <li><a href="#sizes"><span class="ar" lang="ar">المقاسات</span><span class="en" lang="en">Sizes</span></a></li>
         <li><a href="#services"><span class="ar" lang="ar">خدماتنا</span><span class="en" lang="en">Services</span></a></li>
         <li><a href="#wholesale"><span class="ar" lang="ar">بالجملة</span><span class="en" lang="en">Wholesale</span></a></li>
         <li><a href="#about"><span class="ar" lang="ar">عن إبداع</span><span class="en" lang="en">About</span></a></li>
@@ -600,7 +733,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   </section>
 
   <!-- ── Gallery ──────────────────────────────────────────────────── -->
-  <section class="sec sec--tint" id="designs" aria-labelledby="designsH">
+  <section class="sec" id="designs" aria-labelledby="designsH">
     <div class="wrap">
       <p class="eyebrow"><span class="ar" lang="ar">المعرض</span><span class="en" lang="en">The menu</span></p>
       <h2 class="sec__h" id="designsH">
@@ -624,8 +757,9 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
           </p>
           <ul>
             <li><span class="ar" lang="ar">أسماء وتفصيل — سلاسل، خواتم، دبل، زراير قميص، ميداليات</span><span class="en" lang="en">Names &amp; personalised — pendants, rings, cufflinks, keyrings</span></li>
-            <li><span class="ar" lang="ar">فرعوني — خراطيش بالاسم بالهيروغليفي</span><span class="en" lang="en">Pharaonic — cartouches with your name in hieroglyphs</span></li>
-            <li><span class="ar" lang="ar">رجالي — خواتم، أساور، دلايات</span><span class="en" lang="en">Men's — rings, bracelets, pendants</span></li>
+            <li><span class="ar" lang="ar">فرعوني — خراطيش بالاسم بالهيروغليفي، وتمائم بالتطعيم</span><span class="en" lang="en">Pharaonic — cartouches with your name in hieroglyphs, and inlaid amulets</span></li>
+            <li><span class="ar" lang="ar">رجالي — خواتم، أساور، دلايات، زراير قميص</span><span class="en" lang="en">Men's — rings, bracelets, pendants, cufflinks</span></li>
+            <li><span class="ar" lang="ar">حريمي — سلاسل بالاسم، أساور، دلايات</span><span class="en" lang="en">Women's — name necklaces, bracelets, pendants</span></li>
             <li><span class="ar" lang="ar">أندية — شعارات الأندية</span><span class="en" lang="en">Football clubs — club crests</span></li>
             <li><span class="ar" lang="ar">دبل وهدايا</span><span class="en" lang="en">Couples &amp; gifts</span></li>
           </ul>
@@ -639,7 +773,35 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
         </div>
       </noscript>
 
-      <div class="chips" id="chips" role="group" aria-label="تصفية التصاميم"></div>
+      <div class="entries">
+        <button class="entry" type="button" data-entry="mens">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="14" r="6"/><path d="m14.2 9.8 6-6M16 3.8h4.2V8"/></svg>
+          <span>
+            <span class="ar" lang="ar">للرجال</span><span class="en" lang="en">For men</span>
+            <small><span class="ar" lang="ar">خواتم، زراير قميص، أساور</span><span class="en" lang="en">Rings, cufflinks, bracelets</span></small>
+          </span>
+          <svg class="entry__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+        <button class="entry" type="button" data-entry="womens">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M12 15v6M9 18.5h6"/></svg>
+          <span>
+            <span class="ar" lang="ar">للستات</span><span class="en" lang="en">For women</span>
+            <small><span class="ar" lang="ar">سلاسل بالاسم، دلايات، أساور</span><span class="en" lang="en">Name necklaces, pendants, bracelets</span></small>
+          </span>
+          <svg class="entry__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <div class="filters">
+        <div class="filter-row">
+          <p class="filter-row__k" aria-hidden="true"><span class="ar" lang="ar">النوع</span><span class="en" lang="en">Type</span></p>
+          <div class="chips chips--type" id="typeChips" role="group" aria-label="تصفية حسب النوع"></div>
+        </div>
+        <div class="filter-row">
+          <p class="filter-row__k" aria-hidden="true"><span class="ar" lang="ar">التصميم</span><span class="en" lang="en">Design</span></p>
+          <div class="chips" id="chips" role="group" aria-label="تصفية التصاميم"></div>
+        </div>
+      </div>
 
       <ul class="grid" id="grid"></ul>
       <p class="empty" id="empty" hidden></p>
@@ -648,7 +810,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   </section>
 
   <!-- ── How to order ─────────────────────────────────────────────── -->
-  <section class="sec" id="order" aria-labelledby="orderH">
+  <section class="sec sec--sand" id="order" aria-labelledby="orderH">
     <div class="wrap">
       <p class="eyebrow"><span class="ar" lang="ar">خطوة بخطوة</span><span class="en" lang="en">Step by step</span></p>
       <h2 class="sec__h" id="orderH"><span class="ar" lang="ar">إزاي تطلب</span><span class="en" lang="en">How to order</span></h2>
@@ -675,8 +837,72 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
     </div>
   </section>
 
+  <!-- ── Sizes ────────────────────────────────────────────────────────
+       No ring-size number and no conversion table: which sizing convention
+       Emad works in is unconfirmed, and a wrong conversion on a made-to-order
+       ring costs real money. The string method plus circumference → inner
+       diameter is arithmetic, not a convention, so it is safe to publish.
+       ───────────────────────────────────────────────────────────────── -->
+  <section class="sec" id="sizes" aria-labelledby="sizesH">
+    <div class="wrap">
+      <p class="eyebrow"><span class="ar" lang="ar">قبل ما تطلب</span><span class="en" lang="en">Before you order</span></p>
+      <h2 class="sec__h" id="sizesH"><span class="ar" lang="ar">المقاسات</span><span class="en" lang="en">Sizes</span></h2>
+      <p class="sec__sub">
+        <span class="ar" lang="ar">مش عارف مقاسك؟ قيسه في نص دقيقة بخيط ومسطرة.</span>
+        <span class="en" lang="en">Not sure of your size? Measure it in half a minute with a thread and a ruler.</span>
+      </p>
+
+      <div class="sizes">
+        <div>
+          <ol class="sizes__steps">
+            <li><span class="ar" lang="ar">لف خيط أو شريط ورق حوالين صباعك، من غير شد.</span><span class="en" lang="en">Wrap a thread or a paper strip around your finger, without pulling it tight.</span></li>
+            <li><span class="ar" lang="ar">علّم بالقلم مكان ما الخيط يتقاطع مع نفسه.</span><span class="en" lang="en">Mark with a pen where the thread crosses itself.</span></li>
+            <li><span class="ar" lang="ar">افرد الخيط وقيس لغاية العلامة بالمسطرة بالمليمتر.</span><span class="en" lang="en">Unwrap it and measure up to the mark with a ruler, in millimetres.</span></li>
+            <li><span class="ar" lang="ar">ابعتلنا الرقم ده على واتساب مع طلبك.</span><span class="en" lang="en">Send us that number on WhatsApp along with your order.</span></li>
+          </ol>
+
+          <svg class="sizes__dia" viewBox="0 0 320 132" fill="none" role="img"
+               aria-label="رسم توضيحي: خيط ملفوف حول الصباع وعليه علامة، وتحته مسطرة بتقيس الطول"
+               data-label-ar="رسم توضيحي: خيط ملفوف حول الصباع وعليه علامة، وتحته مسطرة بتقيس الطول"
+               data-label-en="Diagram: a thread wrapped around a finger with a mark on it, and a ruler measuring the length below">
+            <rect x="18" y="10" width="52" height="86" rx="26" stroke="currentColor" stroke-width="2" opacity=".45"/>
+            <rect x="12" y="44" width="64" height="17" rx="8" stroke="currentColor" stroke-width="2.4"/>
+            <path d="M44 40v-7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <circle cx="44" cy="30" r="3" fill="currentColor"/>
+            <path d="M104 52h176" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M104 44v16M280 44v16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <rect x="104" y="76" width="176" height="34" rx="5" stroke="currentColor" stroke-width="2" opacity=".55"/>
+            <path d="M126 76v12M148 76v8M170 76v12M192 76v8M214 76v12M236 76v8M258 76v12"
+                  stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+          </svg>
+        </div>
+
+        <div class="calc">
+          <label for="mm">
+            <span class="ar" lang="ar">محيط الصباع بالمليمتر</span>
+            <span class="en" lang="en">Finger circumference in mm</span>
+          </label>
+          <input id="mm" type="number" inputmode="decimal" min="30" max="120" step="0.5"
+                 placeholder="54" autocomplete="off">
+          <div class="calc__out">
+            <span class="calc__k">
+              <span class="ar" lang="ar">قطر الخاتم التقريبي</span>
+              <span class="en" lang="en">Approximate ring diameter</span>
+            </span>
+            <span class="calc__v" id="mmOut" aria-live="polite">—</span>
+          </div>
+          <p class="calc__hint" id="mmHint"></p>
+          <p class="calc__note">
+            <span class="ar" lang="ar">ده تقدير مبدئي. هنتأكد من المقاس معاك قبل ما نبدأ الشغل.</span>
+            <span class="en" lang="en">This is a rough estimate. We'll confirm the size with you before we start.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Services ─────────────────────────────────────────────────── -->
-  <section class="sec sec--tint" id="services" aria-labelledby="svcH">
+  <section class="sec" id="services" aria-labelledby="svcH">
     <div class="wrap">
       <p class="eyebrow"><span class="ar" lang="ar">الورشة</span><span class="en" lang="en">Workshop</span></p>
       <h2 class="sec__h" id="svcH"><span class="ar" lang="ar">خدماتنا</span><span class="en" lang="en">Our services</span></h2>
@@ -703,7 +929,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   </section>
 
   <!-- ── Wholesale ────────────────────────────────────────────────── -->
-  <section class="sec" id="wholesale" aria-labelledby="whH">
+  <section class="sec sec--copper" id="wholesale" aria-labelledby="whH">
     <div class="wrap">
       <div class="panel panel--split">
         <div>
@@ -723,7 +949,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   </section>
 
   <!-- ── About ────────────────────────────────────────────────────── -->
-  <section class="sec sec--tint" id="about" aria-labelledby="aboutH">
+  <section class="sec" id="about" aria-labelledby="aboutH">
     <div class="wrap about__grid">
       <div>
         <p class="eyebrow"><span class="ar" lang="ar">من ١٩٩٧</span><span class="en" lang="en">Since 1997</span></p>
@@ -752,7 +978,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   </section>
 
   <!-- ── Contact ──────────────────────────────────────────────────── -->
-  <section class="sec" id="contact" aria-labelledby="contactH">
+  <section class="sec sec--sand" id="contact" aria-labelledby="contactH">
     <div class="wrap">
       <p class="eyebrow"><span class="ar" lang="ar">تواصل</span><span class="en" lang="en">Reach us</span></p>
       <h2 class="sec__h" id="contactH"><span class="ar" lang="ar">كلمنا</span><span class="en" lang="en">Get in touch</span></h2>
@@ -840,10 +1066,19 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   <div class="lb__panel" id="lbPanel">
     <!-- no src/srcset until it opens: src="" would resolve to the page URL
          and fire a pointless request on every load -->
-    <picture>
-      <source id="lbSrc" type="image/webp">
-      <img id="lbImg" alt="" width="800" height="800" decoding="async">
-    </picture>
+    <div class="lb__figure">
+      <picture>
+        <source id="lbSrc" type="image/webp">
+        <img id="lbImg" alt="" width="800" height="800" decoding="async">
+      </picture>
+      <button class="lb__pg lb__pgPrev" id="lbPgPrev" type="button" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+      </button>
+      <button class="lb__pg lb__pgNext" id="lbPgNext" type="button" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+    <div class="lb__dots" id="lbDots" aria-hidden="true" hidden></div>
     <div class="lb__body">
       <h3 class="lb__t" id="lbT"></h3>
       <p class="lb__d" id="lbD"></p>
@@ -879,147 +1114,265 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
 var WA_NUMBER = "201149030164";
 var TEL = "+201149030164";
 
-/* Categories: names | pharaonic | mens | clubs | couples */
+/* Two orthogonal axes per item:
+     types      — what it is:  rings pendants necklaces bracelets keychains
+                               cufflinks pins beads
+     categories — what it looks like: names pharaonic mens womens clubs couples
+   An item can carry several of each; filters are AND across the axes and OR
+   within one. `img` is normally one path (the -400 and .webp variants are
+   derived from it), and may be an ARRAY of paths for a piece photographed more
+   than once — the lightbox then builds a photo pager. Order below is display
+   order, interleaved so the colour is not all at the bottom of the grid. */
 var DESIGNS = [
-  { id:"eb-001", img:"assets/designs/eb-001", categories:["pharaonic","names"],
-    title_ar:"خرطوش فرعوني بالاسم", title_en:"Pharaonic cartouche pendant",
-    alt_ar:"دلايتين خرطوش فرعوني، واحدة فضة وواحدة ذهبي، منقوش عليهم هيروغليفي",
-    alt_en:"Two pharaonic cartouche pendants, one silver and one gold, engraved with hieroglyphs" },
+  { id:"eb-029", img:"assets/designs/eb-029", types:["pendants"], categories:["pharaonic"],
+    title_ar:"جعارين فضة بأحجار ملونة", title_en:"Silver scarabs with coloured stones",
+    alt_ar:"مجموعة دلايات جعران فضة مترصعة بالفيروز واللازورد والمرجان",
+    alt_en:"A group of silver scarab pendants inlaid with turquoise, lapis and coral" },
 
-  { id:"eb-002", img:"assets/designs/eb-002", categories:["mens","names"],
+  { id:"eb-002", img:"assets/designs/eb-002", types:["rings"], categories:["mens","names"],
     title_ar:"خاتم رجالي باسم عربي", title_en:"Men's signet ring with an Arabic name",
     alt_ar:"خاتم رجالي فضة بفص أسود عليه اسم عربي بارز، وجوانب منقوشة",
     alt_en:"A men's silver signet ring with a raised Arabic name on a black face and engraved shoulders" },
 
-  { id:"eb-003", img:"assets/designs/eb-003", categories:["names"],
-    title_ar:"ميدالية اسم عربي مفرغ", title_en:"Cut-out Arabic name keyring",
-    alt_ar:"ميدالية مفاتيح فضة دائرية باسم عربي مفرغ بخط متشابك",
-    alt_en:"A round silver keyring with an Arabic name cut out in interlaced script" },
-
-  { id:"eb-004", img:"assets/designs/eb-004", categories:["couples","names"],
-    title_ar:"دبل مزدوجة بالأسماء", title_en:"Stacked name bands",
-    alt_ar:"خاتم فضة من حلقتين متلاصقتين، كل واحدة منقوش عليها اسم",
-    alt_en:"A silver ring of two stacked bands, each engraved with a name" },
-
-  { id:"eb-005", img:"assets/designs/eb-005", categories:["clubs","mens"],
-    title_ar:"خاتم بشعار النادي", title_en:"Club crest ring",
-    alt_ar:"خاتم فضة رجالي بشعار نادي كرة قدم بالمينا الحمراء والسودا",
-    alt_en:"A men's silver ring with a football club crest in red and black enamel" },
-
-  { id:"eb-006", img:"assets/designs/eb-006", categories:["names"],
-    title_ar:"دلاية دائرية بآية قرآنية", title_en:"Round pendant with a Qur'anic verse",
-    alt_ar:"دلاية فضة دائرية منقوش عليها آية قرآنية، على سلسلة، على قماش أزرق",
-    alt_en:"A round silver pendant engraved with a Qur'anic verse, on a chain against blue fabric" },
-
-  { id:"eb-007", img:"assets/designs/eb-007", categories:["mens"],
-    title_ar:"خاتم رجالي بحجر أسود", title_en:"Men's ring with a black stone",
-    alt_ar:"خاتم رجالي فضة بحجر أسود بيضاوي كبير وجسم مجدول",
-    alt_en:"A men's silver ring with a large oval black stone and a braided band" },
-
-  { id:"eb-008", img:"assets/designs/eb-008", categories:["names","couples"],
-    title_ar:"دلاية بشكل وكلمة على ذوقك", title_en:"Silhouette pendant with your own words",
-    alt_ar:"دلاية فضة مفرغة على شكل أم وبنتها، وتحتها كلمة بخط عربي",
-    alt_en:"A cut-out silver pendant of a mother and daughter above a line of Arabic script" },
-
-  { id:"eb-009", img:"assets/designs/eb-009", categories:["pharaonic","names"],
-    title_ar:"خرطوش فرعوني بنقش غائر", title_en:"Cartouche pendant with inlaid hieroglyphs",
-    alt_ar:"دلاية خرطوش فضة برموز هيروغليفية سودا، ممسوكة قدام خشب قديم",
-    alt_en:"A silver cartouche pendant with blackened hieroglyphs, held against weathered wood" },
-
-  { id:"eb-010", img:"assets/designs/eb-010", categories:["names","mens"],
-    title_ar:"زراير قميص باسم عربي", title_en:"Arabic name cufflinks",
-    alt_ar:"زوج زراير قميص فضة بوش أسود عليه اسم عربي، على حامل جلد",
-    alt_en:"A pair of silver cufflinks with an Arabic name on a black face, on a leather stand" },
-
-  { id:"eb-011", img:"assets/designs/eb-011", categories:["couples"],
-    title_ar:"دبل الشمس والقمر", title_en:"Sun and moon pair of rings",
-    alt_ar:"خاتمين فضة رفيعين، واحد عليه شمس والتاني عليه هلال",
-    alt_en:"Two slim silver rings, one with a sun motif and one with a crescent moon" },
-
-  { id:"eb-012", img:"assets/designs/eb-012", categories:["mens"],
-    title_ar:"خاتم رجالي بوصلة", title_en:"Men's compass ring",
-    alt_ar:"خاتم رجالي فضة بوش بوصلة أسود ونجمة نحاسي اللون وشكل مرساة على الجنب",
-    alt_en:"A men's silver ring with a blackened compass face, a copper-toned star and an anchor on the shoulder" },
-
-  { id:"eb-013", img:"assets/designs/eb-013", categories:["names","couples"],
+  { id:"eb-013", img:"assets/designs/eb-013", types:["pendants"], categories:["names","couples","womens"],
     title_ar:"دلاية اسم عربي بخط منساب", title_en:"Arabic name pendant in flowing script",
     alt_ar:"دلاية فضة باسم عربي بخط منساب، معروضة في علبة هدية سودا",
     alt_en:"A silver pendant of an Arabic name in flowing script, shown in a black gift box" },
 
-  { id:"eb-014", img:"assets/designs/eb-014", categories:["couples","names"],
-    title_ar:"دلاية حلقات متداخلة بالأسماء", title_en:"Interlocking rings pendant",
-    alt_ar:"دلاية فضة من تلات حلقات متداخلة، كل حلقة منقوش عليها اسم",
-    alt_en:"A silver pendant of three interlocking rings, each engraved with a name" },
+  { id:"eb-041", img:"assets/designs/eb-041", types:["cufflinks"], categories:["names","mens"],
+    title_ar:"زراير قميص بالأسماء", title_en:"Name cufflinks",
+    alt_ar:"زوجين زراير قميص فضة، كل زوج عليه اسم عربي بخط منساب",
+    alt_en:"Two pairs of silver cufflinks, each pair engraved with an Arabic name in flowing script" },
 
-  { id:"eb-015", img:"assets/designs/eb-015", categories:["mens","couples"],
-    title_ar:"دبل عريضة بنقش عربي", title_en:"Wide bands engraved in Arabic",
-    alt_ar:"خاتمين فضة عريضين منقوش عليهم كلام بالعربي بحروف سودا",
-    alt_en:"Two wide silver bands engraved with Arabic lettering picked out in black" },
+  { id:"eb-030", img:"assets/designs/eb-030", types:["pendants"], categories:["pharaonic"],
+    title_ar:"مفاتيح الحياة بالتطعيم", title_en:"Ankh pendants with stone inlay",
+    alt_ar:"صفوف دلايات مفتاح الحياة فضة، مطعمة بالفيروز واللازورد والمرجان",
+    alt_en:"Rows of silver ankh pendants inlaid with turquoise, lapis and coral" },
 
-  { id:"eb-016", img:"assets/designs/eb-016", categories:["pharaonic","names"],
-    title_ar:"خرطوش فرعوني فضة وذهب", title_en:"Cartouche pendant in silver and gold",
-    alt_ar:"دلاية خرطوش فضة برموز هيروغليفية ذهبي وأطراف مفرودة، على سطح خشب",
-    alt_en:"A silver cartouche pendant with gold hieroglyphs and flared ends, on a wooden surface" },
-
-  { id:"eb-017", img:"assets/designs/eb-017", categories:["names"],
+  { id:"eb-017", img:"assets/designs/eb-017", types:["bracelets"], categories:["names","womens"],
     title_ar:"أسورة باسم مفرغ", title_en:"Cut-out name bracelet",
     alt_ar:"أسورة سلسلة فضة رفيعة باسم مفرغ في النص وتاج صغير",
     alt_en:"A fine silver chain bracelet with a cut-out name and a small crown" },
 
-  { id:"eb-018", img:"assets/designs/eb-018", categories:["mens"],
-    title_ar:"خاتم رجالي بفص مستطيل", title_en:"Men's ring with a rectangular stone",
-    alt_ar:"خاتم رجالي فضة بفص أسود مستطيل وجوانب منقوشة، على قماش رمادي",
-    alt_en:"A men's silver ring with a rectangular black stone and engraved side panels, on grey fabric" },
+  { id:"eb-001", img:"assets/designs/eb-001", types:["pendants"], categories:["pharaonic","names"],
+    title_ar:"خرطوش فرعوني بالاسم", title_en:"Pharaonic cartouche pendant",
+    alt_ar:"دلايتين خرطوش فرعوني، واحدة فضة وواحدة ذهبي، منقوش عليهم هيروغليفي",
+    alt_en:"Two pharaonic cartouche pendants, one silver and one gold, engraved with hieroglyphs" },
 
-  { id:"eb-019", img:"assets/designs/eb-019", categories:["couples","names"],
-    title_ar:"ميدالية مفاتيح بالنقش", title_en:"Engraved keyring",
-    alt_ar:"ميدالية مفاتيح فضة فيها لوح منقوش وقرصين صغيرين",
-    alt_en:"A silver keyring with an engraved bar and two small discs" },
+  { id:"eb-045", img:"assets/designs/eb-045", types:["keychains"], categories:["names"],
+    title_ar:"ميدالية اسم عربي بخط منساب", title_en:"Arabic name keyring in flowing script",
+    alt_ar:"ميدالية مفاتيح فضة مفرغة على شكل اسم عربي بخط منساب، على سلسلة",
+    alt_en:"A silver keyring cut out as an Arabic name in flowing script, on a chain" },
 
-  { id:"eb-020", img:"assets/designs/eb-020", categories:["names"],
-    title_ar:"دلاية مستطيلة بخط عربي بارز", title_en:"Rectangular plaque pendant in raised Arabic script",
-    alt_ar:"دلاية فضة مستطيلة بخط عربي بارز، على سلسلة رفيعة",
-    alt_en:"A rectangular silver plaque pendant with raised Arabic script, on a fine chain" },
+  { id:"eb-035", img:"assets/designs/eb-035", types:["bracelets"], categories:["pharaonic","womens"],
+    title_ar:"أساور فرعوني بالتطعيم", title_en:"Pharaonic link bracelets with inlay",
+    alt_ar:"أساور فضة من وحدات فرعوني — عنخ وجعران ولوتس — مطعمة بالفيروز واللازورد",
+    alt_en:"Silver bracelets of pharaonic links — ankh, scarab and lotus — inlaid with turquoise and lapis" },
 
-  { id:"eb-021", img:"assets/designs/eb-021", categories:["mens","names"],
-    title_ar:"أسورة جلد بخرزات فضة", title_en:"Leather bracelet with engraved silver beads",
-    alt_ar:"أسورة جلد أسود مجدول بتلات خرزات فضة منقوش عليها أسماء، في إيد راجل",
-    alt_en:"A braided black leather bracelet with three engraved silver name beads, on a man's wrist" },
+  { id:"eb-007", img:"assets/designs/eb-007", types:["rings"], categories:["mens"],
+    title_ar:"خاتم رجالي بحجر أسود", title_en:"Men's ring with a black stone",
+    alt_ar:"خاتم رجالي فضة بحجر أسود بيضاوي كبير وجسم مجدول",
+    alt_en:"A men's silver ring with a large oval black stone and a braided band" },
 
-  { id:"eb-022", img:"assets/designs/eb-022", categories:["names"],
-    title_ar:"دلاية مربعة بخط كوفي", title_en:"Square pendant in Kufic script",
-    alt_ar:"دلاية فضة مربعة بخط كوفي هندسي، على سلسلة رفيعة",
-    alt_en:"A square silver pendant in geometric Kufic script, on a fine chain" },
+  { id:"eb-008", img:"assets/designs/eb-008", types:["pendants"], categories:["names","couples","womens"],
+    title_ar:"دلاية بشكل وكلمة على ذوقك", title_en:"Silhouette pendant with your own words",
+    alt_ar:"دلاية فضة مفرغة على شكل أم وبنتها، وتحتها كلمة بخط عربي",
+    alt_en:"A cut-out silver pendant of a mother and daughter above a line of Arabic script" },
 
-  { id:"eb-023", img:"assets/designs/eb-023", categories:["mens","couples"],
-    title_ar:"دبلة فضة مطروقة", title_en:"Hammered silver band",
-    alt_ar:"دبلة فضة عريضة بسطح مطروق ومطفي، وعليها ختم ٩٢٥",
-    alt_en:"A wide silver band with a hammered matte surface, stamped 925" },
+  { id:"eb-031", img:"assets/designs/eb-031", types:["pendants"], categories:["pharaonic","womens"],
+    title_ar:"دلايات لوتس وصقر حورس", title_en:"Lotus and Horus falcon pendants",
+    alt_ar:"دلايات فضة على شكل زهرة اللوتس وصقر حورس، مطعمة بالفيروز واللازورد",
+    alt_en:"Silver pendants shaped as lotus flowers and Horus falcons, inlaid with turquoise and lapis" },
 
-  { id:"eb-024", img:"assets/designs/eb-024", categories:["couples"],
-    title_ar:"دلاية بالشكل اللي تختاره", title_en:"Pendant in any shape you choose",
-    alt_ar:"دلاية فضة على شكل بالتة ألوان رسام بمينا ملونة وفرشتين",
-    alt_en:"A silver pendant shaped like an artist's palette with coloured enamel and two brushes" },
-
-  { id:"eb-025", img:"assets/designs/eb-025", categories:["names","mens"],
+  { id:"eb-025", img:"assets/designs/eb-025", types:["cufflinks"], categories:["names","mens"],
     title_ar:"زراير قميص بخط عربي", title_en:"Arabic calligraphy cufflinks",
     alt_ar:"زوج زراير قميص فضة مربعة بخط عربي مفرغ",
     alt_en:"A pair of square silver cufflinks with openwork Arabic calligraphy" },
 
-  { id:"eb-026", img:"assets/designs/eb-026", categories:["mens","names"],
+  { id:"eb-011", img:"assets/designs/eb-011", types:["rings"], categories:["couples"],
+    title_ar:"دبل الشمس والقمر", title_en:"Sun and moon pair of rings",
+    alt_ar:"خاتمين فضة رفيعين، واحد عليه شمس والتاني عليه هلال",
+    alt_en:"Two slim silver rings, one with a sun motif and one with a crescent moon" },
+
+  { id:"eb-020", img:"assets/designs/eb-020", types:["pendants","necklaces"], categories:["names","womens"],
+    title_ar:"دلاية مستطيلة بخط عربي بارز", title_en:"Rectangular plaque pendant in raised Arabic script",
+    alt_ar:"دلاية فضة مستطيلة بخط عربي بارز، على سلسلة رفيعة",
+    alt_en:"A rectangular silver plaque pendant with raised Arabic script, on a fine chain" },
+
+  { id:"eb-032", img:"assets/designs/eb-032", types:["pendants"], categories:["pharaonic"],
+    title_ar:"عين حورس وتمائم فرعوني", title_en:"Eye of Horus and pharaonic amulets",
+    alt_ar:"تشكيلة تمائم فضة فيها عين حورس وخرطوش وزهور لوتس بتطعيم ملون",
+    alt_en:"An assortment of silver amulets including the Eye of Horus, a cartouche and lotus flowers with coloured inlay" },
+
+  { id:"eb-037", img:"assets/designs/eb-037", types:["rings"], categories:["mens","names"],
+    title_ar:"خاتم رجالي باسم إنجليزي", title_en:"Men's signet ring with a Latin name",
+    alt_ar:"خاتم رجالي فضة بوش أسود دائري مكتوب عليه اسم بحروف إنجليزي",
+    alt_en:"A men's silver signet ring with a round black face and a name in Latin letters" },
+
+  { id:"eb-003", img:"assets/designs/eb-003", types:["keychains"], categories:["names"],
+    title_ar:"ميدالية اسم عربي مفرغ", title_en:"Cut-out Arabic name keyring",
+    alt_ar:"ميدالية مفاتيح فضة دائرية باسم عربي مفرغ بخط متشابك",
+    alt_en:"A round silver keyring with an Arabic name cut out in interlaced script" },
+
+  { id:"eb-021", img:"assets/designs/eb-021", types:["bracelets"], categories:["mens","names"],
+    title_ar:"أسورة جلد بخرزات فضة", title_en:"Leather bracelet with engraved silver beads",
+    alt_ar:"أسورة جلد أسود مجدول بتلات خرزات فضة منقوش عليها أسماء، في إيد راجل",
+    alt_en:"A braided black leather bracelet with three engraved silver name beads, on a man's wrist" },
+
+  { id:"eb-033", img:"assets/designs/eb-033", types:["pendants"], categories:["pharaonic"],
+    title_ar:"أقنعة فرعونية وجعارين", title_en:"Pharaonic mask and scarab pendants",
+    alt_ar:"دلايات فضة على شكل قناع فرعوني وجعران، بخلفيات فيروز ومرجان",
+    alt_en:"Silver pendants shaped as a pharaonic mask and scarabs, on turquoise and coral backings" },
+
+  { id:"eb-005", img:"assets/designs/eb-005", types:["rings"], categories:["clubs","mens"],
+    title_ar:"خاتم بشعار النادي", title_en:"Club crest ring",
+    alt_ar:"خاتم فضة رجالي بشعار نادي كرة قدم بالمينا الحمراء والسودا",
+    alt_en:"A men's silver ring with a football club crest in red and black enamel" },
+
+  { id:"eb-014", img:"assets/designs/eb-014", types:["pendants"], categories:["couples","names"],
+    title_ar:"دلاية حلقات متداخلة بالأسماء", title_en:"Interlocking rings pendant",
+    alt_ar:"دلاية فضة من تلات حلقات متداخلة، كل حلقة منقوش عليها اسم",
+    alt_en:"A silver pendant of three interlocking rings, each engraved with a name" },
+
+  { id:"eb-043", img:"assets/designs/eb-043", types:["keychains"], categories:["couples","names"],
+    title_ar:"ميدالية بإهداء محفور", title_en:"Keyring with an engraved message",
+    alt_ar:"ميدالية مفاتيح فضة مستطيلة محفور عليها جملة إهداء وحرفين وقلب",
+    alt_en:"A rectangular silver keyring engraved with a dedication, two initials and a heart" },
+
+  { id:"eb-034", img:"assets/designs/eb-034", types:["pendants"], categories:["pharaonic"],
+    title_ar:"رؤوس نفرتيتي بأحجار", title_en:"Nefertiti head pendants set with stones",
+    alt_ar:"دلايات فضة على شكل رأس نفرتيتي، متزينة بصفوف أحجار صغيرة ملونة",
+    alt_en:"Silver Nefertiti head pendants set with rows of small coloured stones" },
+
+  { id:"eb-018", img:"assets/designs/eb-018", types:["rings"], categories:["mens"],
+    title_ar:"خاتم رجالي بفص مستطيل", title_en:"Men's ring with a rectangular stone",
+    alt_ar:"خاتم رجالي فضة بفص أسود مستطيل وجوانب منقوشة، على قماش رمادي",
+    alt_en:"A men's silver ring with a rectangular black stone and engraved side panels, on grey fabric" },
+
+  { id:"eb-022", img:"assets/designs/eb-022", types:["pendants","necklaces"], categories:["names"],
+    title_ar:"دلاية مربعة بخط كوفي", title_en:"Square pendant in Kufic script",
+    alt_ar:"دلاية فضة مربعة بخط كوفي هندسي، على سلسلة رفيعة",
+    alt_en:"A square silver pendant in geometric Kufic script, on a fine chain" },
+
+  { id:"eb-046", img:"assets/designs/eb-046", types:["keychains"], categories:["mens"],
+    title_ar:"ميدالية بفص أسود سادة", title_en:"Plain black-stone keyring",
+    alt_ar:"ميدالية مفاتيح فضة بلوح مثمن بفص أسود سادة، من غير نقش",
+    alt_en:"A silver keyring with a plain octagonal black stone panel, with no engraving" },
+
+  { id:"eb-009", img:"assets/designs/eb-009", types:["pendants"], categories:["pharaonic","names"],
+    title_ar:"خرطوش فرعوني بنقش غائر", title_en:"Cartouche pendant with inlaid hieroglyphs",
+    alt_ar:"دلاية خرطوش فضة برموز هيروغليفية سودا، ممسوكة قدام خشب قديم",
+    alt_en:"A silver cartouche pendant with blackened hieroglyphs, held against weathered wood" },
+
+  { id:"eb-038", img:"assets/designs/eb-038", types:["rings"], categories:["mens","names"],
+    title_ar:"خاتم باسم عربي بإطار يوناني", title_en:"Name ring with a Greek-key border",
+    alt_ar:"خاتم فضة بوش أسود عليه اسم عربي، وحواليه إطار بنقش يوناني متعرج",
+    alt_en:"A silver ring with an Arabic name on a black face, framed by a Greek-key border" },
+
+  { id:"eb-024", img:"assets/designs/eb-024", types:["pendants"], categories:["couples"],
+    title_ar:"دلاية بالشكل اللي تختاره", title_en:"Pendant in any shape you choose",
+    alt_ar:"دلاية فضة على شكل بالتة ألوان رسام بمينا ملونة وفرشتين",
+    alt_en:"A silver pendant shaped like an artist's palette with coloured enamel and two brushes" },
+
+  { id:"eb-019", img:"assets/designs/eb-019", types:["keychains"], categories:["couples","names"],
+    title_ar:"ميدالية مفاتيح بالنقش", title_en:"Engraved keyring",
+    alt_ar:"ميدالية مفاتيح فضة فيها لوح منقوش وقرصين صغيرين",
+    alt_en:"A silver keyring with an engraved bar and two small discs" },
+
+  { id:"eb-042", img:"assets/designs/eb-042", types:["cufflinks"], categories:["names","mens"],
+    title_ar:"زراير قميص باسم على وش أسود", title_en:"Name cufflinks on a black face",
+    alt_ar:"زوج زراير قميص فضة دائرية بوش أسود عليه اسم عربي بارز",
+    alt_en:"A pair of round silver cufflinks with a raised Arabic name on a black face" },
+
+  { id:"eb-006", img:"assets/designs/eb-006", types:["pendants","necklaces"], categories:["names"],
+    title_ar:"دلاية دائرية بآية قرآنية", title_en:"Round pendant with a Qur'anic verse",
+    alt_ar:"دلاية فضة دائرية منقوش عليها آية قرآنية، على سلسلة، على قماش أزرق",
+    alt_en:"A round silver pendant engraved with a Qur'anic verse, on a chain against blue fabric" },
+
+  { id:"eb-023", img:"assets/designs/eb-023", types:["rings"], categories:["mens","couples"],
+    title_ar:"دبلة فضة مطروقة", title_en:"Hammered silver band",
+    alt_ar:"دبلة فضة عريضة بسطح مطروق ومطفي، وعليها ختم ٩٢٥",
+    alt_en:"A wide silver band with a hammered matte surface, stamped 925" },
+
+  { id:"eb-044", img:"assets/designs/eb-044", types:["keychains"], categories:["names","couples"],
+    title_ar:"ميدالية بالاسم والتاريخ", title_en:"Keyring with a name and a date",
+    alt_ar:"ميدالية مفاتيح فضة بلوح محفور عليه تاريخ وقلب مفرغ، وتعليقة باسم",
+    alt_en:"A silver keyring with an engraved plate carrying a date and a cut-out heart, and a name tag" },
+
+  { id:"eb-016", img:"assets/designs/eb-016", types:["pendants"], categories:["pharaonic","names"],
+    title_ar:"خرطوش فرعوني فضة وذهب", title_en:"Cartouche pendant in silver and gold",
+    alt_ar:"دلاية خرطوش فضة برموز هيروغليفية ذهبي وأطراف مفرودة، على سطح خشب",
+    alt_en:"A silver cartouche pendant with gold hieroglyphs and flared ends, on a wooden surface" },
+
+  { id:"eb-039", img:"assets/designs/eb-039", types:["rings"], categories:["mens","names"],
+    title_ar:"خاتم رجالي باسم العيلة", title_en:"Men's ring with a family name",
+    alt_ar:"خاتم رجالي فضة بفص أسود عليه اسم عيلة بالعربي، في علبة خشب",
+    alt_en:"A men's silver ring with a family name in Arabic on a black stone, in a wooden box" },
+
+  { id:"eb-026", img:"assets/designs/eb-026", types:["pendants","necklaces"], categories:["mens","names"],
     title_ar:"دلاية رجالي على حبل جلد", title_en:"Men's bar pendant on a cord",
     alt_ar:"دلاية فضة رفيعة طويلة على حبل جلد أسود، في رقبة راجل",
     alt_en:"A slim silver bar pendant on a black leather cord, worn by a man" },
 
-  { id:"eb-027", img:"assets/designs/eb-027", categories:["names"],
+  { id:"eb-010", img:"assets/designs/eb-010", types:["cufflinks"], categories:["names","mens"],
+    title_ar:"زراير قميص باسم عربي", title_en:"Arabic name cufflinks",
+    alt_ar:"زوج زراير قميص فضة بوش أسود عليه اسم عربي، على حامل جلد",
+    alt_en:"A pair of silver cufflinks with an Arabic name on a black face, on a leather stand" },
+
+  { id:"eb-004", img:"assets/designs/eb-004", types:["rings"], categories:["couples","names"],
+    title_ar:"دبل مزدوجة بالأسماء", title_en:"Stacked name bands",
+    alt_ar:"خاتم فضة من حلقتين متلاصقتين، كل واحدة منقوش عليها اسم",
+    alt_en:"A silver ring of two stacked bands, each engraved with a name" },
+
+  { id:"eb-047", img:"assets/designs/eb-047", types:["keychains"], categories:["names"],
+    title_ar:"ميدالية بعبارة بخط عربي", title_en:"Keyring with a phrase in Arabic script",
+    alt_ar:"ميدالية مفاتيح فضة مفرغة على شكل عبارة بالعربي، وتحتها قلب صغير",
+    alt_en:"A silver keyring cut out as an Arabic phrase, with a small heart beneath it" },
+
+  { id:"eb-027", img:"assets/designs/eb-027", types:["pendants"], categories:["names"],
     title_ar:"دلايات دائرية بالاسم والآية", title_en:"Round pendants, name and verse",
     alt_ar:"دلايتين فضة دائريتين في راحة إيد، واحدة عليها اسم والتانية عليها آية",
     alt_en:"Two round silver pendants held in a palm, one with a name and one with a verse" },
 
-  { id:"eb-028", img:"assets/designs/eb-028", categories:["names","mens"],
+  { id:"eb-040", img:"assets/designs/eb-040", types:["rings"], categories:["mens","names"],
+    title_ar:"خاتم بحرف مفرد", title_en:"Initial signet ring",
+    alt_ar:"خاتم فضة عريض بوش كحلي وعليه حرف مفرد بارز",
+    alt_en:"A wide silver signet ring with a navy face and a single raised initial" },
+
+  { id:"eb-015", img:"assets/designs/eb-015", types:["rings"], categories:["mens","couples"],
+    title_ar:"دبل عريضة بنقش عربي", title_en:"Wide bands engraved in Arabic",
+    alt_ar:"خاتمين فضة عريضين منقوش عليهم كلام بالعربي بحروف سودا",
+    alt_en:"Two wide silver bands engraved with Arabic lettering picked out in black" },
+
+  { id:"eb-028", img:"assets/designs/eb-028", types:["pins"], categories:["names","mens"],
     title_ar:"دبوس جاكيت باسم عربي", title_en:"Arabic name lapel pin",
     alt_ar:"دبوس جاكيت فضة دائري باسم عربي بارز على وش أسود",
-    alt_en:"A round silver lapel pin with a raised Arabic name on a black face" }
+    alt_en:"A round silver lapel pin with a raised Arabic name on a black face" },
+
+  { id:"eb-036", img:"assets/designs/eb-036", types:["rings"], categories:["mens","names"],
+    title_ar:"خاتم رجالي بفص أسود واسم عربي", title_en:"Men's black-stone ring with an Arabic name",
+    alt_ar:"خاتم رجالي فضة بفص أسود بيضاوي عليه اسم عربي بخط ديواني، وجوانب منقوشة",
+    alt_en:"A men's silver ring with an oval black stone carrying an Arabic name in Diwani script, and engraved shoulders" },
+
+  { id:"eb-012", img:"assets/designs/eb-012", types:["rings"], categories:["mens"],
+    title_ar:"خاتم رجالي بوصلة", title_en:"Men's compass ring",
+    alt_ar:"خاتم رجالي فضة بوش بوصلة أسود ونجمة نحاسي اللون وشكل مرساة على الجنب",
+    alt_en:"A men's silver ring with a blackened compass face, a copper-toned star and an anchor on the shoulder" }
+];
+
+/* Product type. `beads` (مسابح) and any other key with no items yet simply does
+   not render a chip — an empty filter is worse than a missing one, and the chip
+   appears on its own the day a piece is added. */
+var TYPES = [
+  { key:"all",       ar:"الكل",        en:"All" },
+  { key:"rings",     ar:"خواتم",       en:"Rings" },
+  { key:"pendants",  ar:"دلايات",      en:"Pendants" },
+  { key:"necklaces", ar:"سلاسل",       en:"Necklaces" },
+  { key:"bracelets", ar:"أساور",       en:"Bracelets" },
+  { key:"keychains", ar:"ميداليات",    en:"Keychains" },
+  { key:"cufflinks", ar:"زراير قميص",  en:"Cufflinks" },
+  { key:"pins",      ar:"دبابيس",      en:"Pins" },
+  { key:"beads",     ar:"مسابح",       en:"Prayer beads" }
 ];
 
 var CATEGORIES = [
@@ -1027,6 +1380,7 @@ var CATEGORIES = [
   { key:"names",     ar:"أسماء وتفصيل",    en:"Names & personalised" },
   { key:"pharaonic", ar:"فرعوني",          en:"Pharaonic" },
   { key:"mens",      ar:"رجالي",           en:"Men's" },
+  { key:"womens",    ar:"حريمي",           en:"Women's" },
   { key:"clubs",     ar:"أندية",           en:"Football clubs" },
   { key:"couples",   ar:"دبل وهدايا",      en:"Couples & gifts" }
 ];
@@ -1042,7 +1396,14 @@ var T = {
     askB:"ابعتلنا صورة أو فكرة وإحنا ننفذها. أي اسم، أي مقاس، أي تفصيلة.",
     askCta:"ابعتلنا فكرتك",
     empty:"مفيش تصاميم في القسم ده دلوقتي — بس ده مش معناه إننا مبنعملهوش. كلمنا وقولنا على فكرتك.",
+    /* two axes make an empty result much likelier, so the line names what is
+       actually filtered instead of saying "this category" */
+    emptyIn:"مفيش حاجة تحت «{f}» دلوقتي — بس ده مش معناه إننا مبنعملهاش. كلمنا وقولنا على فكرتك.",
     filterLabel:"تصفية التصاميم",
+    typeFilterLabel:"تصفية حسب النوع",
+    photoPrev:"الصورة السابقة",
+    photoNext:"الصورة التالية",
+    photo:"صورة",
     /* same approved wording as the How-to-order section, repeated where the
        "can I afford this?" question actually occurs */
     price:"التسعير حسب وزن القطعة وسعر الفضة يوم الطلب، زائد أجر التصنيع.",
@@ -1062,7 +1423,12 @@ var T = {
     askB:"Send us a photo or an idea and we'll make it. Any name, any size, any detail.",
     askCta:"Send us your idea",
     empty:"Nothing in this category just yet — which doesn't mean we can't make it. Message us and tell us what you're after.",
+    emptyIn:"Nothing under “{f}” just yet — which doesn't mean we can't make it. Message us and tell us what you're after.",
     filterLabel:"Filter designs",
+    typeFilterLabel:"Filter by type",
+    photoPrev:"Previous photo",
+    photoNext:"Next photo",
+    photo:"Photo",
     price:"Pricing depends on the weight of the piece and the silver price that day, plus the making charge.",
     count:"styles shown",
     of:"of",
@@ -1131,65 +1497,101 @@ function setLang(l, persist){
   lb.setAttribute("aria-label", l === "ar" ? "Switch to English" : "التبديل إلى العربية");
   document.querySelector(".nav").setAttribute("aria-label", l === "ar" ? "أقسام الصفحة" : "Page sections");
   document.getElementById("chips").setAttribute("aria-label", T[l].filterLabel);
+  document.getElementById("typeChips").setAttribute("aria-label", T[l].typeFilterLabel);
 
   renderChips();
   renderGrid();
+  paintSizes();
   if (LB.open) paintLightbox();
 
   if (persist){ try { localStorage.setItem(STORE, l); } catch(e){} }
 }
 
 /* ── Gallery ────────────────────────────────────────────────────────── */
-var FILTER = "all";
+var FILTER = "all";    /* design axis — ?c= */
+var TFILTER = "all";   /* type axis   — ?t= */
 var visible = [];
 
-/* Keep the active filter in the URL so a category is shareable — Emad can
-   send a customer straight to the pharaonic pieces — and so a reload doesn't
-   silently reset the view. replaceState, not pushState: chip clicks must not
-   fill the history stack, because Back is reserved for closing the lightbox. */
+/* Keep both filters in the URL so a view is shareable — Emad can send a
+   customer straight to the pharaonic pendants — and so a reload doesn't
+   silently reset it. replaceState, not pushState: chip clicks must not fill
+   the history stack, because Back is reserved for closing the lightbox. */
 function syncUrl(){
   if (!window.history || !history.replaceState) return;
   try {
     var u = new URL(location.href);
     if (FILTER === "all") u.searchParams.delete("c");
     else u.searchParams.set("c", FILTER);
+    if (TFILTER === "all") u.searchParams.delete("t");
+    else u.searchParams.set("t", TFILTER);
     history.replaceState(history.state, "", u.pathname + u.search + u.hash);
   } catch(e){}
 }
 
-function readInitialFilter(){
+/* Unknown or hostile values fall back to All, in either param. */
+function readInitialParam(name, list, populatedOnly){
   try {
-    var c = new URLSearchParams(location.search).get("c");
-    if (c && CATEGORIES.some(function(x){ return x.key === c; })) return c;
+    var v = new URLSearchParams(location.search).get(name);
+    if (v && list.some(function(x){
+      return x.key === v && (!populatedOnly || v === "all" || countFor(name, v) > 0);
+    })) return v;
   } catch(e){}
   return "all";
 }
 
-function renderChips(){
-  var box = document.getElementById("chips");
+function countFor(param, key){
+  var field = (param === "t") ? "types" : "categories";
+  var n = 0;
+  DESIGNS.forEach(function(d){ if ((d[field] || []).indexOf(key) !== -1) n++; });
+  return n;
+}
+
+function labelFor(list, key){
+  for (var i = 0; i < list.length; i++) if (list[i].key === key) return list[i][LANG];
+  return "";
+}
+
+/* One chip builder for both rows. A type chip is only built when something
+   actually carries that type, so `beads` stays out of the row until a مسبحة
+   exists rather than rendering a filter that can only ever come back empty. */
+function buildChips(boxId, list, param, current, onPick){
+  var box = document.getElementById(boxId);
   box.innerHTML = "";
-  CATEGORIES.forEach(function(c){
+  list.forEach(function(c){
+    if (c.key !== "all" && countFor(param, c.key) === 0) return;
     var b = document.createElement("button");
     b.type = "button";
     b.className = "chip";
     b.textContent = c[LANG];
-    b.setAttribute("aria-pressed", String(c.key === FILTER));
-    b.addEventListener("click", function(){
-      FILTER = c.key;
-      syncUrl();
-      renderChips();
-      renderGrid();
-      document.getElementById("designsH").scrollIntoView({block:"start", behavior:"smooth"});
-    });
+    b.setAttribute("aria-pressed", String(c.key === current));
+    b.addEventListener("click", function(){ onPick(c.key); });
     box.appendChild(b);
   });
+}
+
+function afterPick(){
+  syncUrl();
+  renderChips();
+  renderGrid();
+  document.getElementById("designsH").scrollIntoView({block:"start", behavior:"smooth"});
+}
+
+function renderChips(){
+  buildChips("typeChips", TYPES, "t", TFILTER, function(k){ TFILTER = k; afterPick(); });
+  buildChips("chips", CATEGORIES, "c", FILTER, function(k){ FILTER = k; afterPick(); });
+}
+
+/* `img` is either one path or an array of them. Everything downstream works in
+   arrays so a second photo is a one-character edit to an entry. */
+function photos(d){
+  return Object.prototype.toString.call(d.img) === "[object Array]" ? d.img : [d.img];
 }
 
 function cardMarkup(d){
   var t = d["title_" + LANG];
   var alt = d["alt_" + LANG];
   var li = document.createElement("li");
-  var p = esc(d.img);   /* escaped too: entries get added by copy-paste */
+  var p = esc(photos(d)[0]);   /* escaped too: entries get added by copy-paste */
   var sizes = '(min-width:920px) 400px, (min-width:560px) 45vw, 92vw';
   li.className = "card";
   /* No aria-label on the button: its accessible name comes from the image alt
@@ -1237,14 +1639,24 @@ function askCard(){
 function renderGrid(){
   var grid = document.getElementById("grid");
   var empty = document.getElementById("empty");
+  /* AND across the two rows, OR within a row */
   visible = DESIGNS.filter(function(d){
-    return FILTER === "all" || d.categories.indexOf(FILTER) !== -1;
+    var okC = FILTER === "all" || (d.categories || []).indexOf(FILTER) !== -1;
+    var okT = TFILTER === "all" || (d.types || []).indexOf(TFILTER) !== -1;
+    return okC && okT;
   });
   grid.innerHTML = "";
   visible.forEach(function(d){ grid.appendChild(cardMarkup(d)); });
   /* the grid is never left empty: the ask card is always the last tile */
   grid.appendChild(askCard());
-  empty.textContent = T[LANG].empty;
+
+  /* name the active filters, since with two axes "this category" is ambiguous */
+  var names = [];
+  if (TFILTER !== "all") names.push(labelFor(TYPES, TFILTER));
+  if (FILTER !== "all") names.push(labelFor(CATEGORIES, FILTER));
+  empty.textContent = names.length
+    ? T[LANG].emptyIn.replace("{f}", names.join(" + "))
+    : T[LANG].empty;
   empty.hidden = visible.length > 0;
   /* filtering swaps the content silently for a screen reader otherwise */
   document.getElementById("liveCount").textContent =
@@ -1266,15 +1678,22 @@ function esc(s){
 }
 
 /* ── Lightbox ───────────────────────────────────────────────────────── */
-var LB = { open:false, i:0, returnTo:null };
+/* Two levels of navigation, deliberately kept apart:
+     i — which style you are looking at   (side arrows, Left/Right keys)
+     j — which photo of that style        (in-panel arrows, dots, swipe)
+   The photo pager pushes no history entry, so Back still closes the lightbox
+   rather than stepping back through photos. */
+var LB = { open:false, i:0, j:0, returnTo:null };
 var lbEl = document.getElementById("lb");
 
 function paintLightbox(){
   var d = visible[LB.i];
   if (!d) return;
   var t = d["title_" + LANG];
-  document.getElementById("lbSrc").srcset = d.img + ".webp";
-  document.getElementById("lbImg").src = d.img + ".jpg";
+  var ph = photos(d);
+  if (LB.j >= ph.length) LB.j = 0;
+  document.getElementById("lbSrc").srcset = ph[LB.j] + ".webp";
+  document.getElementById("lbImg").src = ph[LB.j] + ".jpg";
   document.getElementById("lbImg").alt = d["alt_" + LANG];
   document.getElementById("lbT").textContent = t;
   document.getElementById("lbD").textContent = d["alt_" + LANG];
@@ -1290,11 +1709,42 @@ function paintLightbox(){
   var many = visible.length > 1;
   document.getElementById("lbPrev").hidden = !many;
   document.getElementById("lbNext").hidden = !many;
+
+  /* the photo pager exists only when the piece actually has a second photo */
+  var multi = ph.length > 1;
+  var pgP = document.getElementById("lbPgPrev"), pgN = document.getElementById("lbPgNext");
+  var dots = document.getElementById("lbDots");
+  pgP.hidden = pgN.hidden = dots.hidden = !multi;
+  pgP.setAttribute("aria-label", T[LANG].photoPrev);
+  pgN.setAttribute("aria-label", T[LANG].photoNext);
+  dots.innerHTML = "";
+  if (multi){
+    ph.forEach(function(_, k){
+      var s = document.createElement("span");
+      s.setAttribute("data-on", k === LB.j ? "1" : "0");
+      dots.appendChild(s);
+    });
+    /* the dots are decorative; the position is announced as real text on the
+       counter line, which a screen reader already reads */
+    document.getElementById("lbCount").textContent +=
+      " · " + T[LANG].photo + " " + digits(LB.j + 1) + " " + T[LANG].of + " " + digits(ph.length);
+  }
+}
+
+/* photo pager: wraps within the current style, never changes the style */
+function stepPhoto(n){
+  var d = visible[LB.i];
+  if (!d) return;
+  var len = photos(d).length;
+  if (len < 2) return;
+  LB.j = (LB.j + n + len) % len;
+  paintLightbox();
 }
 
 function openLightbox(i){
   LB.open = true;
   LB.i = i;
+  LB.j = 0;
   LB.returnTo = document.activeElement;
   lbEl.hidden = false;
   lbEl.classList.add("is-open");
@@ -1335,6 +1785,7 @@ window.addEventListener("popstate", function(){
 function step(n){
   if (!visible.length) return;
   LB.i = (LB.i + n + visible.length) % visible.length;
+  LB.j = 0;                       /* a new style always opens on its first photo */
   paintLightbox();
 }
 
@@ -1343,7 +1794,31 @@ function step(n){
 document.getElementById("lbX").addEventListener("click", function(){ closeLightbox(); });
 document.getElementById("lbPrev").addEventListener("click", function(){ step(-1); });
 document.getElementById("lbNext").addEventListener("click", function(){ step(1); });
+document.getElementById("lbPgPrev").addEventListener("click", function(){ stepPhoto(-1); });
+document.getElementById("lbPgNext").addEventListener("click", function(){ stepPhoto(1); });
 lbEl.addEventListener("click", function(e){ if (e.target === lbEl) closeLightbox(); });
+
+/* Swipe across the image steps photos, and only when there is more than one —
+   a swipe on a single-photo piece does nothing rather than hijacking the
+   gesture. Vertical drags are left alone so the panel can still scroll. */
+(function(){
+  var fig = document.querySelector(".lb__figure");
+  var x0 = null, y0 = null;
+  fig.addEventListener("touchstart", function(e){
+    if (e.touches.length !== 1) { x0 = null; return; }
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, { passive:true });
+  fig.addEventListener("touchend", function(e){
+    if (x0 === null) return;
+    var t = e.changedTouches[0];
+    var dx = t.clientX - x0, dy = t.clientY - y0;
+    x0 = null;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    /* swipe direction follows what is on screen, so it mirrors in RTL */
+    var forward = (LANG === "ar") ? dx > 0 : dx < 0;
+    stepPhoto(forward ? 1 : -1);
+  }, { passive:true });
+})();
 
 document.addEventListener("keydown", function(e){
   if (!LB.open) return;
@@ -1351,6 +1826,11 @@ document.addEventListener("keydown", function(e){
   /* arrows follow reading direction, so "next" is always forward on screen */
   if (e.key === "ArrowRight"){ step(LANG === "ar" ? -1 : 1); return; }
   if (e.key === "ArrowLeft"){ step(LANG === "ar" ? 1 : -1); return; }
+  /* the second axis gets the second pair of arrows: left/right stays "next
+     style", which is what it has always done, and up/down walks the photos of
+     the style already on screen */
+  if (e.key === "ArrowDown"){ e.preventDefault(); stepPhoto(1); return; }
+  if (e.key === "ArrowUp"){ e.preventDefault(); stepPhoto(-1); return; }
   if (e.key !== "Tab") return;
 
   /* focus trap */
@@ -1362,9 +1842,55 @@ document.addEventListener("keydown", function(e){
   else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
 });
 
+/* ── Sizes ──────────────────────────────────────────────────────────── */
+/* Circumference → inner diameter and nothing else. Which sizing convention
+   Emad works in is unconfirmed, so no size number is published: a wrong
+   conversion on a made-to-order ring costs real money, and an unconfirmed fact
+   does not go on the site. The measurement itself is what he needs anyway.
+   Deliberately no WhatsApp prefill here — this section is a reference the
+   customer uses, not another funnel. */
+function ringDiameter(mm){
+  return mm / Math.PI;
+}
+
+function paintSizes(){
+  var input = document.getElementById("mm");
+  var out = document.getElementById("mmOut");
+  var hint = document.getElementById("mmHint");
+  if (!input) return;
+  var raw = input.value.trim();
+  if (raw === ""){ out.textContent = "—"; hint.textContent = ""; return; }
+  var mm = parseFloat(raw.replace(",", "."));
+  if (!isFinite(mm) || mm < 30 || mm > 120){
+    out.textContent = "—";
+    hint.textContent = LANG === "ar"
+      ? "المقاسات الطبيعية بين ٣٠ و١٢٠ مليمتر. راجع القياس."
+      : "Normal measurements fall between 30 and 120 mm. Check the measurement.";
+    return;
+  }
+  var d = ringDiameter(mm);
+  out.textContent = digits(d.toFixed(1)) + (LANG === "ar" ? " مم" : " mm");
+  hint.textContent = LANG === "ar"
+    ? "محيط " + digits(String(mm)) + " مم"
+    : "From a " + mm + " mm circumference";
+}
+
 /* ── Boot ───────────────────────────────────────────────────────────── */
 document.getElementById("langBtn").addEventListener("click", function(){
   setLang(LANG === "ar" ? "en" : "ar", true);
+});
+
+document.getElementById("mm").addEventListener("input", paintSizes);
+
+/* Entry cards: pre-apply one design filter and scroll to the grid. Not a
+   section split — a hard gender split would force every piece into a bucket,
+   and most of the catalogue genuinely isn't gendered. */
+Array.prototype.forEach.call(document.querySelectorAll("[data-entry]"), function(b){
+  b.addEventListener("click", function(){
+    FILTER = b.getAttribute("data-entry");
+    TFILTER = "all";
+    afterPick();
+  });
 });
 
 if (FACEBOOK_URL){
@@ -1373,7 +1899,9 @@ if (FACEBOOK_URL){
 }
 
 document.getElementById("yr").textContent = new Date().getFullYear();
-FILTER = readInitialFilter();          /* before the first render, so ?c= sticks */
+/* both before the first render, so ?c= and ?t= stick */
+FILTER = readInitialParam("c", CATEGORIES, true);
+TFILTER = readInitialParam("t", TYPES, true);
 setLang(readInitialLang(), false);
 
 /* hreflang + og:url need the one absolute origin; everything else is relative */
