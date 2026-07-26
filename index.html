@@ -125,6 +125,10 @@ html[lang="en"] .ar{display:none}
   text-decoration:none;font-weight:600;
 }
 .skip:focus{inset-block-start:0}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;
+}
 
 /* ── Buttons ────────────────────────────────────────────────────────── */
 .btn{
@@ -148,7 +152,7 @@ html[lang="en"] .ar{display:none}
 .hdr{position:sticky;inset-block-start:0;z-index:40;background:rgba(245,240,231,.92);backdrop-filter:blur(10px);border-block-end:1px solid var(--line)}
 @supports not (backdrop-filter:blur(2px)){.hdr{background:var(--ivory)}}
 .hdr__bar{display:flex;align-items:center;gap:.75rem;min-height:64px;padding-block:.55rem}
-.wordmark{display:flex;flex-direction:column;text-decoration:none;color:var(--charcoal);margin-inline-end:auto;line-height:1.1}
+.wordmark{display:flex;flex-direction:column;justify-content:center;min-height:44px;text-decoration:none;color:var(--charcoal);margin-inline-end:auto;line-height:1.1}
 .wordmark-name{font-weight:700;font-size:clamp(1.12rem,1rem + .8vw,1.4rem);letter-spacing:-.02em}
 .wordmark-sub{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);font-weight:600}
 html[lang="ar"] .wordmark-sub{letter-spacing:.2em}
@@ -207,7 +211,13 @@ section{scroll-margin-block-start:88px}
 /* ── Hero ───────────────────────────────────────────────────────────── */
 .hero{padding-block:clamp(2.5rem,6vw,5rem)}
 .hero__grid{display:grid;gap:clamp(2rem,5vw,3.5rem);align-items:center}
-@media (min-width:880px){.hero__grid{grid-template-columns:1fr auto}}
+/* The image track must be a DEFINITE 400px, not `auto`. An auto track sizes to
+   the item's max-content, and the img carries width="800", so the track
+   resolved to 826px (800 + 24 padding + 2 border) while width:min(400px,100%)
+   clamped only what was painted — leaving 426px of dead track and squeezing
+   the headline into a 294px ribbon. minmax(0,1fr) stops the text track from
+   being floored by its own min-content. */
+@media (min-width:960px){.hero__grid{grid-template-columns:minmax(0,1fr) 400px}}
 .hero h1{font-size:clamp(1.9rem,1.3rem + 3.2vw,3.35rem);max-width:16ch}
 html[lang="en"] .hero h1{max-width:14ch}
 .hero__sub{margin-block-start:1.15rem;color:var(--muted);max-width:46ch;font-size:1.08rem}
@@ -431,6 +441,56 @@ body.lb-open .hdr{backdrop-filter:none;z-index:1}
 html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)}
 @media (min-width:560px){.lb__prev{inset-inline-start:-56px}.lb__next{inset-inline-end:-56px}}
 .lb__count{margin-block-start:.9rem;font-size:.8rem;color:var(--muted);text-align:center}
+.lb__price{margin-block-start:.8rem;font-size:.82rem;line-height:1.55;color:var(--muted)}
+
+/* Landscape phone: a stacked panel pushes the WhatsApp button off-screen
+   inside the scroll area, and that button is the whole point of the page.
+   Go side-by-side so the CTA is always visible without scrolling. */
+@media (max-height:620px) and (min-width:620px){
+  .lb__stage{width:min(720px,100%)}
+  .lb__panel{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:1rem;align-items:start}
+  .lb__panel img{max-width:220px}
+  .lb__body{padding:.15rem .4rem .3rem}
+  .lb__t{font-size:1.05rem}
+  .lb__cta{margin-block-start:.85rem}
+  .lb__count{margin-block-start:.6rem;text-align:start}
+  .lb__prev{inset-inline-start:-52px}
+  .lb__next{inset-inline-end:-52px}
+}
+
+/* No-JS: the grid is built from the DESIGNS array, so without scripting the
+   gallery is empty. Never leave that visitor without a way to reach Emad. */
+.noscript{
+  margin-block-start:1.5rem;padding:1.35rem 1.5rem;
+  background:var(--card);border:1px solid var(--line);
+  border-inline-start:3px solid var(--copper);border-radius:var(--r);
+  border-start-start-radius:0;border-end-start-radius:0;max-width:70ch;
+}
+.noscript h3{font-size:1.05rem;margin-block-end:.5rem}
+.noscript p{color:var(--muted)}
+.noscript ul{margin:.9rem 0;padding-inline-start:1.2rem;color:var(--muted)}
+.noscript .btn{margin-block-start:.4rem}
+
+/* Print: someone will print this to carry to the workshop, or to hand to a
+   relative. Drop the furniture, keep the styles and the phone number, and
+   spell out the WhatsApp number since a tap target means nothing on paper. */
+@media print{
+  .hdr,.nav,.sticky-wa,.lb,.skip,.chips,.hero__cta,.ftr__acts{display:none!important}
+  body{background:#fff;color:#000;font-size:11pt}
+  .sec,.hero{padding-block:1rem;border:0}
+  .sec--tint{background:#fff}
+  .ftr{background:#fff;color:#000;margin:0;padding-block:1rem;border-block-start:1px solid #999}
+  .ftr a,.ftr p{color:#000}
+  .grid{grid-template-columns:repeat(3,1fr)!important;gap:10px}
+  .card,.panel,.svc,.contact,.note,.frame{break-inside:avoid;box-shadow:none;border-color:#bbb}
+  .card--ask{display:none}
+  .card__cta,.about__img{display:none}
+  a[href^="tel:"]::after{content:" (" attr(href) ")";font-size:9pt}
+  #contact::after{
+    content:"WhatsApp: +20 11 49030164";
+    display:block;margin-block-start:1rem;font-weight:700;
+  }
+}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -552,10 +612,38 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
         <span class="en" lang="en">These photos show the kinds of pieces we make. Everything is handmade to order, with your name, your size and your details.</span>
       </p>
 
+      <noscript>
+        <div class="noscript">
+          <h3>
+            <span class="ar" lang="ar">التصاميم محتاجة جافاسكريبت تشتغل</span>
+            <span class="en" lang="en">The gallery needs JavaScript</span>
+          </h3>
+          <p>
+            <span class="ar" lang="ar">بنعمل شغل فضة ٩٢٥ بالإيد في الأنواع دي:</span>
+            <span class="en" lang="en">We make handmade 925 silver in these styles:</span>
+          </p>
+          <ul>
+            <li><span class="ar" lang="ar">أسماء وتفصيل — سلاسل، خواتم، دبل، زراير قميص، ميداليات</span><span class="en" lang="en">Names &amp; personalised — pendants, rings, cufflinks, keyrings</span></li>
+            <li><span class="ar" lang="ar">فرعوني — خراطيش بالاسم بالهيروغليفي</span><span class="en" lang="en">Pharaonic — cartouches with your name in hieroglyphs</span></li>
+            <li><span class="ar" lang="ar">رجالي — خواتم، أساور، دلايات</span><span class="en" lang="en">Men's — rings, bracelets, pendants</span></li>
+            <li><span class="ar" lang="ar">أندية — شعارات الأندية</span><span class="en" lang="en">Football clubs — club crests</span></li>
+            <li><span class="ar" lang="ar">دبل وهدايا</span><span class="en" lang="en">Couples &amp; gifts</span></li>
+          </ul>
+          <p>
+            <span class="ar" lang="ar">كلمنا على واتساب <span class="ltr">+20 11 49030164</span> أو اتصل على <span class="ltr">011 49030164</span> ونبعتلك صور التصاميم.</span>
+            <span class="en" lang="en">Message us on WhatsApp <span class="ltr">+20 11 49030164</span> or call <span class="ltr">011 49030164</span> and we'll send you photos of the styles.</span>
+          </p>
+          <a class="btn btn--primary" href="https://wa.me/201149030164">
+            <span class="ar" lang="ar">كلمنا على واتساب</span><span class="en" lang="en">Message on WhatsApp</span>
+          </a>
+        </div>
+      </noscript>
+
       <div class="chips" id="chips" role="group" aria-label="تصفية التصاميم"></div>
 
       <ul class="grid" id="grid"></ul>
       <p class="empty" id="empty" hidden></p>
+      <p class="sr-only" id="liveCount" role="status" aria-live="polite"></p>
     </div>
   </section>
 
@@ -763,6 +851,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A9.9 9.9 0 1 0 12 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.1Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3A2.9 2.9 0 0 0 6.9 12a8.9 8.9 0 0 0 3.6 3.9c1.7 1 2.2 1 2.9 1a2.6 2.6 0 0 0 1.8-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>
         <span id="lbCtaT"></span>
       </a>
+      <p class="lb__price" id="lbPrice"></p>
       <p class="lb__count" id="lbCount"></p>
     </div>
   </div>
@@ -954,6 +1043,10 @@ var T = {
     askCta:"ابعتلنا فكرتك",
     empty:"مفيش تصاميم في القسم ده دلوقتي — بس ده مش معناه إننا مبنعملهوش. كلمنا وقولنا على فكرتك.",
     filterLabel:"تصفية التصاميم",
+    /* same approved wording as the How-to-order section, repeated where the
+       "can I afford this?" question actually occurs */
+    price:"التسعير حسب وزن القطعة وسعر الفضة يوم الطلب، زائد أجر التصنيع.",
+    count:"تصميم معروض",
     of:"من",
     prev:"التصميم السابق",
     next:"التصميم التالي",
@@ -970,6 +1063,8 @@ var T = {
     askCta:"Send us your idea",
     empty:"Nothing in this category just yet — which doesn't mean we can't make it. Message us and tell us what you're after.",
     filterLabel:"Filter designs",
+    price:"Pricing depends on the weight of the piece and the silver price that day, plus the making charge.",
+    count:"styles shown",
     of:"of",
     prev:"Previous style",
     next:"Next style",
@@ -1048,6 +1143,28 @@ function setLang(l, persist){
 var FILTER = "all";
 var visible = [];
 
+/* Keep the active filter in the URL so a category is shareable — Emad can
+   send a customer straight to the pharaonic pieces — and so a reload doesn't
+   silently reset the view. replaceState, not pushState: chip clicks must not
+   fill the history stack, because Back is reserved for closing the lightbox. */
+function syncUrl(){
+  if (!window.history || !history.replaceState) return;
+  try {
+    var u = new URL(location.href);
+    if (FILTER === "all") u.searchParams.delete("c");
+    else u.searchParams.set("c", FILTER);
+    history.replaceState(history.state, "", u.pathname + u.search + u.hash);
+  } catch(e){}
+}
+
+function readInitialFilter(){
+  try {
+    var c = new URLSearchParams(location.search).get("c");
+    if (c && CATEGORIES.some(function(x){ return x.key === c; })) return c;
+  } catch(e){}
+  return "all";
+}
+
 function renderChips(){
   var box = document.getElementById("chips");
   box.innerHTML = "";
@@ -1059,6 +1176,7 @@ function renderChips(){
     b.setAttribute("aria-pressed", String(c.key === FILTER));
     b.addEventListener("click", function(){
       FILTER = c.key;
+      syncUrl();
       renderChips();
       renderGrid();
       document.getElementById("designsH").scrollIntoView({block:"start", behavior:"smooth"});
@@ -1071,17 +1189,23 @@ function cardMarkup(d){
   var t = d["title_" + LANG];
   var alt = d["alt_" + LANG];
   var li = document.createElement("li");
+  var p = esc(d.img);   /* escaped too: entries get added by copy-paste */
+  var sizes = '(min-width:920px) 400px, (min-width:560px) 45vw, 92vw';
   li.className = "card";
+  /* No aria-label on the button: its accessible name comes from the image alt
+     plus the hidden action text, so a screen reader reads the piece once
+     rather than announcing the label and the alt back to back. */
   li.innerHTML =
-    '<button class="card__media" type="button" aria-label="' + esc(T[LANG].openLb + " — " + t) + '">' +
+    '<button class="card__media" type="button">' +
       '<picture>' +
-        '<source type="image/webp" sizes="(min-width:920px) 400px, (min-width:560px) 45vw, 92vw" ' +
-          'srcset="' + d.img + '-400.webp 400w, ' + d.img + '.webp 800w">' +
-        '<img src="' + d.img + '-400.jpg" ' +
-          'srcset="' + d.img + '-400.jpg 400w, ' + d.img + '.jpg 800w" ' +
-          'sizes="(min-width:920px) 400px, (min-width:560px) 45vw, 92vw" ' +
+        '<source type="image/webp" sizes="' + sizes + '" ' +
+          'srcset="' + p + '-400.webp 400w, ' + p + '.webp 800w">' +
+        '<img src="' + p + '-400.jpg" ' +
+          'srcset="' + p + '-400.jpg 400w, ' + p + '.jpg 800w" ' +
+          'sizes="' + sizes + '" ' +
           'width="800" height="800" loading="lazy" decoding="async" alt="' + esc(alt) + '">' +
       '</picture>' +
+      '<span class="sr-only">' + esc(T[LANG].openLb) + '</span>' +
     '</button>' +
     '<div class="card__body">' +
       '<h3 class="card__t">' + esc(t) + '</h3>' +
@@ -1122,6 +1246,9 @@ function renderGrid(){
   grid.appendChild(askCard());
   empty.textContent = T[LANG].empty;
   empty.hidden = visible.length > 0;
+  /* filtering swaps the content silently for a screen reader otherwise */
+  document.getElementById("liveCount").textContent =
+    digits(visible.length) + " " + T[LANG].count;
 }
 
 /* Arabic-Indic numerals for counters and the like. The phone number stays in
@@ -1154,6 +1281,7 @@ function paintLightbox(){
   var cta = document.getElementById("lbCta");
   cta.href = waLink("style", t);
   document.getElementById("lbCtaT").textContent = T[LANG].lbCta;
+  document.getElementById("lbPrice").textContent = T[LANG].price;
   document.getElementById("lbCount").textContent =
     digits(LB.i + 1) + " " + T[LANG].of + " " + digits(visible.length);
   document.getElementById("lbPrev").setAttribute("aria-label", T[LANG].prev);
@@ -1174,16 +1302,35 @@ function openLightbox(i){
   document.body.style.overflow = "hidden";
   paintLightbox();
   document.getElementById("lbX").focus();
+  /* On a phone, Back is how people close an overlay. Without a history entry
+     it walks them off the site entirely. pushState throws on some file://
+     origins, so this stays optional rather than required. */
+  LB.pushed = false;
+  try {
+    history.pushState({ ebdaaLb: true }, "");
+    LB.pushed = true;
+  } catch(e){}
 }
 
-function closeLightbox(){
+function closeLightbox(fromPopstate){
+  if (!LB.open) return;
   LB.open = false;
   lbEl.classList.remove("is-open");
   lbEl.hidden = true;
   document.body.classList.remove("lb-open");
   document.body.style.overflow = "";
   if (LB.returnTo && LB.returnTo.focus) LB.returnTo.focus();
+  /* closing by button/Esc/backdrop should also drop the history entry, so the
+     stack doesn't accumulate one dead step per image viewed */
+  if (!fromPopstate && LB.pushed){
+    LB.pushed = false;
+    try { history.back(); } catch(e){}
+  }
 }
+
+window.addEventListener("popstate", function(){
+  if (LB.open){ LB.pushed = false; closeLightbox(true); }
+});
 
 function step(n){
   if (!visible.length) return;
@@ -1191,7 +1338,9 @@ function step(n){
   paintLightbox();
 }
 
-document.getElementById("lbX").addEventListener("click", closeLightbox);
+/* wrapped, not passed directly: as a listener it would receive the Event as
+   the fromPopstate argument and skip the history cleanup */
+document.getElementById("lbX").addEventListener("click", function(){ closeLightbox(); });
 document.getElementById("lbPrev").addEventListener("click", function(){ step(-1); });
 document.getElementById("lbNext").addEventListener("click", function(){ step(1); });
 lbEl.addEventListener("click", function(e){ if (e.target === lbEl) closeLightbox(); });
@@ -1224,6 +1373,7 @@ if (FACEBOOK_URL){
 }
 
 document.getElementById("yr").textContent = new Date().getFullYear();
+FILTER = readInitialFilter();          /* before the first render, so ?c= sticks */
 setLang(readInitialLang(), false);
 
 /* hreflang + og:url need the one absolute origin; everything else is relative */
