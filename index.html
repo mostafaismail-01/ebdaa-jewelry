@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>إبداع للمجوهرات — فضة ٩٢٥ شغل يد، الهرم، الجيزة</title>
-<meta name="description" content="تصنيع الفضة عيار ٩٢٥ شغل يد حسب طلبك: أسماء، فرعوني، رجالي، أندية، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧. كلمنا على واتساب.">
+<title>إبداع للمجوهرات — مجوهرات شغل يد، الهرم، الجيزة</title>
+<meta name="description" content="تصنيع مجوهرات شغل يد حسب طلبك — فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧. كلمنا على واتساب.">
 <meta name="theme-color" content="#F5F0E7">
 
 <!-- ─────────────────────────────────────────────────────────────────────
@@ -27,14 +27,14 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="إبداع للمجوهرات — Ebdaa Jewelry">
-<meta property="og:title" content="إبداع للمجوهرات — فضة ٩٢٥ شغل يد">
-<meta property="og:description" content="اتفرج على التصاميم واطلب قطعتك بالاسم أو الشكل اللي يناسبك. ورشتنا في الهرم من سنة ١٩٩٧.">
+<meta property="og:title" content="إبداع للمجوهرات — مجوهرات شغل يد">
+<meta property="og:description" content="تصنيع مجوهرات شغل يد حسب طلبك — فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧.">
 <meta property="og:locale" content="ar_EG">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:image" content="assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="إبداع للمجوهرات — فضة ٩٢٥ شغل يد، الهرم، الجيزة">
+<meta property="og:image:alt" content="إبداع للمجوهرات — مجوهرات شغل يد، الهرم، الجيزة">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -70,14 +70,17 @@
   --copper:#9A6846;
 
   /* Round 2: the page was one flat ivory from top to bottom, which is most of
-     what read as "pale". These two surfaces band the sections instead. */
-  --sand:#EDE5D8;          /* deeper warm surface — How to order, Contact */
-  --copper-band:#F0E1D4;   /* Wholesale only: the one section that is an aside */
+     what read as "pale". A second warm surface bands the sections instead.
+     Round 3 cut the copper-tinted Wholesale band: with copper promoted to the
+     one accent that MEANS something (warm metals), a whole copper field
+     competes with the metals strip for the same signal. */
+  --sand:#EDE5D8;          /* deeper warm surface — How to order, Services, Contact */
 
-  /* Round 2: pulled from the turquoise in the pharaonic stones, so the
-     interface colour comes out of the product rather than being decoration. */
-  --turquoise:#2E8B93;        /* 3.5:1 on ivory — rules, dividers, icons only */
-  --turquoise-text:#1F6B72;   /* 5.4:1 ivory, 4.9:1 sand, 6.2:1 under white */
+  /* Round 3 retired --turquoise / --turquoise-text from the interface. Not a
+     taste call: copper now carries meaning (silver, gold and copper are what he
+     works in) and turquoise carries none, so keeping both diluted the one that
+     does. Turquoise survives where it was always strongest — in the stones in
+     the photographs. See DECISIONS.md session 4; this reverses session 3. */
 
   /* derived */
   --card:#FCFAF5;
@@ -86,14 +89,17 @@
      small text. This darker cast is for anything copper that is actually read.
      Round 2 darkened it from #8F5E3C: with three surfaces instead of one it now
      has to clear AA on sand (4.38 → 4.76) and on the copper band too. */
-  --copper-text:#8A5836;   /* 5.2:1 ivory · 4.8:1 sand · 4.7:1 copper band */
+  --copper-text:#8A5836;   /* 5.2:1 ivory · 4.8:1 sand · 6.0:1 under white */
   --line:rgba(36,35,33,.14);
   --line-strong:rgba(36,35,33,.26);
   --lapis-dark:#16293D;
 
   --wrap:1256px;        /* 3 × 400px cards + 2 × 28px gaps */
   --pad:clamp(1rem,5vw,2.5rem);
-  --r:14px;
+  /* Round 3: 14px → 4px. Pills, panels and 14px radii everywhere made the page
+     read like a dashboard rather than a showroom. The pill buttons keep 999px
+     on purpose — a button should still look like a button. */
+  --r:4px;
   --ease:cubic-bezier(.22,.7,.3,1);
 }
 
@@ -213,17 +219,14 @@ section{scroll-margin-block-start:88px}
 /* Section banding. Ivory is what makes silver read as silver, so the rhythm
    comes from two warmer surfaces rather than from louder colour. Every
    text/background pair below clears WCAG AA — see DECISIONS.md for the ratios. */
-.sec--sand{background:var(--sand)}
-.sec--copper{background:var(--copper-band)}
-.sec--sand,.sec--copper{border-block:1px solid var(--line)}
+.sec--sand{background:var(--sand);border-block:1px solid var(--line)}
 .eyebrow{
   display:flex;align-items:center;gap:.7rem;
   font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
   color:var(--copper-text);margin-block-end:.85rem;
 }
-/* the one rule that is turquoise everywhere: it repeats down the page and ties
-   the interface colour to the stones in the product photos */
-.eyebrow::after{content:"";flex:1;height:2px;background:var(--turquoise);max-width:80px;opacity:.75}
+/* the one repeating rule down the page, now copper — the single accent */
+.eyebrow::after{content:"";flex:1;height:2px;background:var(--copper);max-width:80px;opacity:.75}
 .sec__h{font-size:clamp(1.65rem,1.3rem + 1.8vw,2.5rem)}
 .sec__sub{color:var(--muted);max-width:56ch;margin-block-start:.9rem;font-size:1.02rem}
 
@@ -237,22 +240,28 @@ section{scroll-margin-block-start:88px}
    the headline into a 294px ribbon. minmax(0,1fr) stops the text track from
    being floored by its own min-content. */
 @media (min-width:960px){.hero__grid{grid-template-columns:minmax(0,1fr) 400px}}
-.hero h1{font-size:clamp(1.9rem,1.3rem + 3.2vw,3.35rem);max-width:16ch}
-html[lang="en"] .hero h1{max-width:14ch}
+.hero h1{font-size:clamp(1.9rem,1.3rem + 3.2vw,3.35rem);max-width:19ch}
+html[lang="en"] .hero h1{max-width:17ch}
+/* The headline poses the question — "in the material you choose" — and this
+   answers it in three words, so it sits directly under the h1 and above the
+   fold rather than down in the meta row. Copper because copper is now what the
+   accent means. 5.2:1 on ivory. */
+.metals{
+  margin-block-start:.9rem;font-size:.98rem;font-weight:700;
+  letter-spacing:.03em;color:var(--copper-text);
+}
 .hero__sub{margin-block-start:1.15rem;color:var(--muted);max-width:46ch;font-size:1.08rem}
 .hero__cta{display:flex;flex-wrap:wrap;gap:.65rem;margin-block-start:1.9rem}
 .hero__meta{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;margin-block-start:2rem;padding-block-start:1.4rem;border-block-start:1px solid var(--line);font-size:.9rem;color:var(--muted)}
 .hero__meta b{color:var(--charcoal);font-weight:600}
 
-/* Source photos top out at 720px, so nothing is ever rendered full-bleed.
-   The frame keeps the image at a size it can actually carry. */
-.frame{
-  width:min(400px,100%);margin-inline-end:auto;
-  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-  padding:12px;box-shadow:0 18px 40px -28px rgba(36,35,33,.45);
-}
-.frame img{border-radius:calc(var(--r) - 6px);aspect-ratio:1;object-fit:cover;width:100%;height:auto}
-.frame figcaption{margin-block-start:.7rem;font-size:.78rem;color:var(--muted);text-align:center;line-height:1.5}
+/* Even the sharpest source is 1200px, so nothing is ever rendered full-bleed —
+   the 400px cap holds for the hero exactly as it does for the grid. Round 3
+   dropped the card, the padding and the shadow: the photograph sits on the
+   ivory ground like everything else now. */
+.frame{width:min(400px,100%);margin-inline-end:auto}
+.frame img{border-radius:var(--r);aspect-ratio:1;object-fit:cover;width:100%;height:auto}
+.frame figcaption{margin-block-start:.7rem;font-size:.78rem;color:var(--muted);text-align:start;line-height:1.5}
 
 /* ── Entry cards ────────────────────────────────────────────────────── */
 /* Not a section split. These pre-apply the design filter and scroll to the
@@ -266,12 +275,14 @@ html[lang="en"] .hero h1{max-width:14ch}
   display:flex;align-items:center;gap:.85rem;
   min-height:64px;padding:.85rem 1.1rem;text-align:start;
   /* the label hugs the leading edge; the chevron holds the trailing one */
-  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  /* still bounded, because these two are real controls — round 3 de-carded the
+     things that only *looked* like containers, not the ones you press */
+  background:transparent;border:1px solid var(--line-strong);border-radius:var(--r);
   font:inherit;font-weight:700;font-size:1rem;color:var(--charcoal);cursor:pointer;
-  transition:border-color .18s var(--ease),transform .18s var(--ease),background-color .18s var(--ease);
+  transition:border-color .18s var(--ease),background-color .18s var(--ease);
 }
-.entry:hover{border-color:var(--turquoise);transform:translateY(-2px)}
-.entry svg{width:26px;height:26px;flex:none;color:var(--turquoise-text)}
+.entry:hover{border-color:var(--copper)}
+.entry svg{width:26px;height:26px;flex:none;color:var(--copper-text)}
 .entry small{display:block;font-weight:400;font-size:.82rem;color:var(--muted);line-height:1.4}
 .entry > span{min-width:0}
 .entry__go{margin-inline-start:auto;width:20px;height:20px;color:var(--muted)}
@@ -298,37 +309,43 @@ html[dir="rtl"] .entry__go{transform:scaleX(-1)}
 }
 .chip:hover{background:rgba(36,35,33,.05);border-color:var(--charcoal)}
 .chip[aria-pressed="true"]{background:var(--lapis);border-color:var(--lapis);color:#fff}
-/* the type row is turquoise so an active type chip is never mistaken for an
-   active design chip when both rows have a selection */
-.chips--type .chip[aria-pressed="true"]{background:var(--turquoise-text);border-color:var(--turquoise-text);color:#fff}
+/* The two rows must never look alike when both carry a selection. Round 2 used
+   turquoise for that; with turquoise retired the distinction is copper for
+   type, lapis for design. White on --copper-text is 6.0:1. */
+.chips--type .chip[aria-pressed="true"]{background:var(--copper-text);border-color:var(--copper-text);color:#fff}
 
-.grid{display:grid;gap:28px;grid-template-columns:1fr;list-style:none;margin:0;padding:0}
-@media (min-width:560px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:920px){.grid{grid-template-columns:repeat(3,1fr)}}
+/* Two columns from 320px up. One column read as an endless feed — 21,239px of
+   it at 360px — and a two-up grid reads as a menu. Images land at ~145px,
+   far inside the 400px cap, off the 400px source variant. */
+.grid{display:grid;gap:16px;grid-template-columns:repeat(2,1fr);list-style:none;margin:0;padding:0}
+/* grid items default to min-width:auto, which is how round 2 pushed 31px of
+   horizontal scroll onto a 320px phone. WCAG 1.4.10 says no. */
+.grid > li{min-width:0}
+@media (min-width:560px){.grid{gap:22px}}
+@media (min-width:920px){.grid{grid-template-columns:repeat(3,1fr);gap:28px}}
 
-.card{
-  display:flex;flex-direction:column;
-  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
-  overflow:hidden;
-  transition:transform .22s var(--ease),box-shadow .22s var(--ease),border-color .22s var(--ease);
-}
-.card:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:0 22px 38px -30px rgba(36,35,33,.55)}
+/* Round 3 de-carded the tile: no border, no panel, no shadow, no hover lift.
+   Image, then a quiet title on the ivory ground. The uniform square crop and
+   object-fit:cover are untouched — that is what unifies photographs shot on
+   red towelling, bare wood and blue silk, and it is the strongest part of the
+   build. Removing the card changes the frame, not the crop. */
+.card{display:flex;flex-direction:column}
 .card__media{
   position:relative;display:block;width:100%;border:0;padding:0;margin:0;
-  background:var(--card);cursor:zoom-in;appearance:none;
+  background:transparent;cursor:zoom-in;appearance:none;
 }
 .card__media img{
-  width:100%;height:auto;aspect-ratio:1;object-fit:cover;
-  transition:transform .35s var(--ease);
+  width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:var(--r);
 }
-.card:hover .card__media img{transform:scale(1.03)}
 /* Round 2 note was "don't put a description under each design". There is no
    description — this is a one-line title, and it is load-bearing twice: it
    tells the customer what to ask for, and it is interpolated into the WhatsApp
-   prefill. So it stays, quieter and tighter, and the image dominates the card.
-   Deliberately not hover-only: that breaks touch and screen readers. */
-.card__body{display:flex;flex-direction:column;gap:.3rem;padding:.7rem .85rem .75rem;border-block-start:1px solid var(--line)}
-.card__t{font-size:.92rem;font-weight:500;line-height:1.45;color:var(--muted)}
+   prefill for the lightbox CTA. So it stays. Deliberately not hover-only: that
+   breaks touch and screen readers. Round 3 removed the per-card WhatsApp link
+   below it — repeating that CTA 47 times is what made the grid read as noisy,
+   and it cost ~60px of every card. */
+.card__body{display:flex;flex-direction:column;gap:.3rem;padding:.55rem .1rem 0}
+.card__t{font-size:.88rem;font-weight:500;line-height:1.4;color:var(--muted)}
 .card__cta{
   align-self:flex-start;display:inline-flex;align-items:center;gap:.45em;
   min-height:44px;padding:.4rem 0;
@@ -341,21 +358,32 @@ html[dir="rtl"] .entry__go{transform:scaleX(-1)}
 
 /* Tail card — the answer to "I don't see the one I want", and what keeps a
    thin filter (football clubs has a single example) from looking broken. */
+/* The dashed edge stays. It is the one tile that should read as an action
+   rather than a product, and now that it is the only container left in the
+   grid that reads more clearly, not less. */
 .card--ask{
   display:flex;flex-direction:column;justify-content:center;gap:.9rem;
-  padding:1.75rem;background:transparent;
-  border:1.5px dashed var(--line-strong);text-align:start;min-height:220px;
+  padding:clamp(1rem,4vw,1.75rem);background:transparent;border-radius:var(--r);
+  border:1.5px dashed var(--line-strong);text-align:start;min-height:180px;
 }
-.card--ask:hover{transform:none;box-shadow:none;border-color:var(--copper)}
-.card--ask p{color:var(--muted);font-size:.97rem}
+.card--ask:hover{border-color:var(--copper)}
+.card--ask p{color:var(--muted);font-size:clamp(.86rem,2.4vw,.97rem)}
 /* the tail card is a heading, not a caption — it keeps the old weight */
-.card--ask .card__t{font-size:1.1rem;font-weight:700;color:var(--charcoal)}
-.card--ask svg.ask-mark{width:34px;height:34px;color:var(--copper);margin-block-end:.2rem}
+.card--ask .card__t{font-size:clamp(.98rem,2.8vw,1.1rem);font-weight:700;color:var(--charcoal);padding:0}
+.card--ask svg.ask-mark{width:30px;height:30px;color:var(--copper);margin-block-end:.2rem}
 .empty{padding:2.5rem 0;color:var(--muted)}
 .empty[hidden]{display:none}
 
 .grid li{animation:rise .32s var(--ease) both}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Progressive reveal. 12 at a time, and the button carries the number still
+   waiting so the depth of the catalogue stays visible — hiding that is the one
+   real risk of this pattern. Deliberately a button and not infinite scroll:
+   infinite scroll fights the sticky nav, buries the footer and makes the page
+   impossible to leave, which is the exact complaint being fixed. */
+.more{display:flex;justify-content:center;margin-block-start:2rem}
+.more[hidden]{display:none}
 
 /* ── Steps ──────────────────────────────────────────────────────────── */
 .steps{display:grid;gap:1.5rem;margin-block-start:2.5rem;padding:0;list-style:none;counter-reset:s}
@@ -367,14 +395,18 @@ html[dir="rtl"] .entry__go{transform:scaleX(-1)}
   font-weight:700;font-size:1.05rem;color:var(--copper-text);
 }
 .step p{padding-block-start:.35rem}
+/* Sizes lost its nav item, so How to order carries the way in. Inline-flex with
+   a 44px floor: a bare inline link is a 28px tap target. */
+.order__sizes{margin-block-start:1.75rem}
+.order__sizes a{
+  display:inline-flex;align-items:center;min-height:44px;
+  font-weight:600;color:var(--lapis);text-decoration:underline;text-underline-offset:.25em;
+}
+/* No panel — a copper rule on the leading edge does the same job as a bordered
+   card and stops the section reading like a dashboard */
 .note{
-  margin-block-start:2.5rem;padding:1.15rem 1.35rem;
-  background:var(--card);border:1px solid var(--line);
+  margin-block-start:2.5rem;padding-block:.15rem;padding-inline:1.1rem 0;
   border-inline-start:3px solid var(--copper);
-  border-radius:var(--r);
-  /* square off the accented edge — a 3px border meeting a rounded corner
-     leaves a visible wedge */
-  border-start-start-radius:0;border-end-start-radius:0;
   color:var(--muted);max-width:70ch;
 }
 
@@ -391,18 +423,19 @@ html[dir="rtl"] .entry__go{transform:scaleX(-1)}
 .sizes__steps li::before{
   counter-increment:z;content:counter(z);
   flex:none;display:grid;place-items:center;width:28px;height:28px;margin-block-start:.2rem;
-  border-radius:999px;background:var(--turquoise-text);color:#fff;
+  border-radius:999px;background:var(--copper-text);color:#fff;
   font-size:.85rem;font-weight:700;
 }
-.sizes__dia{width:100%;max-width:340px;margin-block-start:1.5rem;color:var(--turquoise-text)}
+.sizes__dia{width:100%;max-width:340px;margin-block-start:1.5rem;color:var(--copper-text)}
 /* the diagram reads finger → ruler, so it mirrors with the text direction; the
    ruler ticks are symmetrical, so flipping costs nothing */
 html[dir="rtl"] .sizes__dia{transform:scaleX(-1)}
+/* One of the few containers that survives round 3: there is a real interaction
+   to bound here, so the box is doing work rather than decorating. */
 .calc{
   padding:1.35rem 1.4rem;background:var(--card);
   border:1px solid var(--line);border-radius:var(--r);
-  border-block-start:3px solid var(--turquoise);
-  border-start-start-radius:0;border-start-end-radius:0;
+  border-block-start:3px solid var(--copper);
 }
 .calc label{display:block;font-weight:600;font-size:.95rem;margin-block-end:.5rem}
 .calc input{
@@ -416,50 +449,53 @@ html[dir="rtl"] .sizes__dia{transform:scaleX(-1)}
   margin-block-start:1.1rem;padding-block-start:1rem;border-block-start:1px solid var(--line);
 }
 .calc__k{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.calc__v{font-size:1.5rem;font-weight:700;color:var(--turquoise-text)}
+.calc__v{font-size:1.5rem;font-weight:700;color:var(--copper-text)}
 .calc__hint{margin-block-start:.6rem;font-size:.85rem;color:var(--muted);min-height:1.3em}
 .calc__note{margin-block-start:1rem;font-size:.88rem;line-height:1.6;color:var(--muted)}
 
 /* ── Services ───────────────────────────────────────────────────────── */
 .svcs{display:grid;gap:1rem;margin-block-start:2.5rem;padding:0;list-style:none;grid-template-columns:repeat(2,1fr)}
 @media (min-width:820px){.svcs{grid-template-columns:repeat(4,1fr);gap:1.25rem}}
+/* A rule and whitespace do what the four bordered panels were doing. Nothing
+   here is interactive, so there is nothing to bound. */
 .svc{
-  display:flex;flex-direction:column;gap:.8rem;
-  padding:1.4rem 1.15rem;background:var(--card);
-  border:1px solid var(--line);border-radius:var(--r);
+  display:flex;flex-direction:column;gap:.7rem;
+  padding-block:1.1rem 0;border-block-start:1px solid var(--line-strong);
   font-weight:600;
 }
 .svc svg{width:26px;height:26px;color:var(--copper);flex:none}
 
 /* ── Wholesale / About / Contact ────────────────────────────────────── */
-.panel{
-  display:grid;gap:1.5rem;align-items:center;
-  padding:clamp(1.6rem,4vw,2.6rem);
-  background:var(--card);border:1px solid var(--line);border-radius:calc(var(--r) + 4px);
-}
-@media (min-width:820px){.panel--split{grid-template-columns:1fr auto;gap:2.5rem}}
-/* On the copper band the panel drops its own surface, otherwise the card white
-   covers the tint and the whole point of banding that section is lost. */
-.sec--copper .panel{background:transparent;border-color:rgba(154,104,70,.32)}
+/* Wholesale lost its copper band in round 3 — a whole copper surface competes
+   with the metals strip for the same signal now that copper means "material".
+   So it is set apart by measure and weight instead: narrower, smaller, quieter
+   than a customer-facing section, which is what an aside to the trade should
+   be. No panel, no border. */
+.panel{display:grid;gap:1.4rem;align-items:center;max-width:74ch}
+@media (min-width:820px){.panel--split{grid-template-columns:minmax(0,1fr) auto;gap:2.5rem;max-width:none}}
+.sec--aside .sec__h{font-size:clamp(1.35rem,1.1rem + 1vw,1.75rem)}
+.sec--aside .sec__sub{max-width:48ch;font-size:.97rem}
 .about__grid{display:grid;gap:clamp(1.75rem,4vw,3rem);align-items:center}
 @media (min-width:860px){.about__grid{grid-template-columns:1fr 1fr}}
-/* The bench photo comes off a compressed Facebook cover, so it is held to a
-   size it can carry rather than allowed to fill its column. */
-.about__img{max-width:460px;border-radius:var(--r);border:1px solid var(--line);overflow:hidden;background:var(--card)}
-.about__cap{max-width:460px}
-.about__img img{width:100%;height:auto;aspect-ratio:1200/549;object-fit:cover}
+/* Held to the 400px cap like every other photograph on the page. */
+.about__img{max-width:400px;border-radius:var(--r);overflow:hidden}
+.about__cap{max-width:400px}
+.about__img img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
 .about__cap{margin-block-start:.6rem;font-size:.78rem;color:var(--muted)}
 
 .contacts{display:grid;gap:1rem;margin-block-start:2.5rem;padding:0;list-style:none}
 @media (min-width:700px){.contacts{grid-template-columns:repeat(2,1fr)}}
+/* These stay bounded: three of the four are tap targets, and a row you can
+   press should look pressable. Dropped the white card surface so they sit on
+   the sand band instead of covering it. */
 .contact{
   display:flex;align-items:center;gap:1rem;
-  padding:1.1rem 1.25rem;background:var(--card);
-  border:1px solid var(--line);border-radius:var(--r);
+  padding:1.1rem 1.25rem;background:transparent;
+  border:1px solid var(--line-strong);border-radius:var(--r);
   text-decoration:none;color:var(--charcoal);
-  transition:border-color .18s var(--ease),transform .18s var(--ease);
+  transition:border-color .18s var(--ease),background-color .18s var(--ease);
 }
-a.contact:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+a.contact:hover{border-color:var(--charcoal);background:rgba(36,35,33,.04)}
 .contact svg{width:22px;height:22px;color:var(--lapis);flex:none}
 .contact__k{display:block;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .contact__v{display:block;font-weight:600;font-size:1.05rem;line-height:1.4}
@@ -473,6 +509,7 @@ a.contact:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 .ftr a{color:#EDE9E0}
 .ftr__top{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:flex-start}
 .ftr__acts{display:flex;flex-wrap:wrap;gap:.6rem}
+.ftr__links a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:.92rem}
 .ftr .btn--ghost{color:#EDE9E0;border-color:rgba(237,233,224,.35)}
 .ftr .btn--ghost:hover{background:rgba(237,233,224,.1);border-color:#EDE9E0}
 .ftr .btn--primary{background:#EDE9E0;color:var(--charcoal)}
@@ -543,10 +580,11 @@ body.lb-open .sticky-wa{display:none}
 html[dir="rtl"] .lb__pg svg{transform:scaleX(-1)}
 .lb__dots{display:flex;justify-content:center;gap:.4rem;margin-block-start:.6rem}
 .lb__dots span{width:7px;height:7px;border-radius:999px;background:var(--line-strong)}
-.lb__dots span[data-on="1"]{background:var(--turquoise-text)}
+.lb__dots span[data-on="1"]{background:var(--copper-text)}
 .lb__body{padding:1.05rem .4rem .3rem}
 .lb__t{font-size:1.2rem;font-weight:700}
 .lb__d{margin-block-start:.4rem;color:var(--muted);font-size:.93rem}
+.lb__mat{margin-block-start:.55rem;color:var(--copper-text);font-weight:600;font-size:.9rem;line-height:1.5}
 .lb__cta{margin-block-start:1.15rem;width:100%}
 /* the sticky bar uses backdrop-filter, which makes it its own stacking
    context; drop it while the modal is open so the scrim reads over it */
@@ -591,10 +629,8 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
 /* No-JS: the grid is built from the DESIGNS array, so without scripting the
    gallery is empty. Never leave that visitor without a way to reach Emad. */
 .noscript{
-  margin-block-start:1.5rem;padding:1.35rem 1.5rem;
-  background:var(--card);border:1px solid var(--line);
-  border-inline-start:3px solid var(--copper);border-radius:var(--r);
-  border-start-start-radius:0;border-end-start-radius:0;max-width:70ch;
+  margin-block-start:1.5rem;padding-block:.2rem;padding-inline:1.2rem 0;
+  border-inline-start:3px solid var(--copper);max-width:70ch;
 }
 .noscript h3{font-size:1.05rem;margin-block-end:.5rem}
 .noscript p{color:var(--muted)}
@@ -605,10 +641,10 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
    relative. Drop the furniture, keep the styles and the phone number, and
    spell out the WhatsApp number since a tap target means nothing on paper. */
 @media print{
-  .hdr,.nav,.sticky-wa,.lb,.skip,.filters,.entries,.hero__cta,.ftr__acts{display:none!important}
+  .hdr,.nav,.sticky-wa,.lb,.skip,.filters,.entries,.hero__cta,.ftr__acts,.more{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   .sec,.hero{padding-block:1rem;border:0}
-  .sec--sand,.sec--copper{background:#fff}
+  .sec--sand{background:#fff}
   /* the calculator is interactive; on paper the string method is the useful part */
   .calc{display:none}
   .ftr{background:#fff;color:#000;margin:0;padding-block:1rem;border-block-start:1px solid #999}
@@ -640,8 +676,8 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
       <a class="wordmark" href="#top">
         <span class="wordmark-name ar" lang="ar">إبداع للمجوهرات</span>
         <span class="wordmark-name en" lang="en">Ebdaa Jewelry</span>
-        <span class="wordmark-sub ar" lang="ar">فضة ٩٢٥ · الهرم</span>
-        <span class="wordmark-sub en" lang="en">925 Silver · El Haram</span>
+        <span class="wordmark-sub ar" lang="ar">شغل يد · الهرم</span>
+        <span class="wordmark-sub en" lang="en">Handmade · El Haram</span>
       </a>
 
       <div class="hdr__acts">
@@ -669,13 +705,16 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   <nav class="nav" aria-label="أقسام الصفحة">
     <div class="wrap">
       <ul class="nav__list">
+        <!-- Four, down from seven. Sizes is a step in ordering, not a
+             destination, so it lives inside How to order; Wholesale is a
+             secondary audience and moved to the footer; Contact came out
+             because the header already carries WhatsApp and Call, the footer
+             repeats them and the sticky button is always there. Every id is
+             unchanged, so existing links still resolve. -->
         <li><a href="#designs"><span class="ar" lang="ar">التصاميم</span><span class="en" lang="en">Designs</span></a></li>
         <li><a href="#order"><span class="ar" lang="ar">إزاي تطلب</span><span class="en" lang="en">How to order</span></a></li>
-        <li><a href="#sizes"><span class="ar" lang="ar">المقاسات</span><span class="en" lang="en">Sizes</span></a></li>
         <li><a href="#services"><span class="ar" lang="ar">خدماتنا</span><span class="en" lang="en">Services</span></a></li>
-        <li><a href="#wholesale"><span class="ar" lang="ar">بالجملة</span><span class="en" lang="en">Wholesale</span></a></li>
         <li><a href="#about"><span class="ar" lang="ar">عن إبداع</span><span class="en" lang="en">About</span></a></li>
-        <li><a href="#contact"><span class="ar" lang="ar">كلمنا</span><span class="en" lang="en">Contact</span></a></li>
       </ul>
     </div>
   </nav>
@@ -686,19 +725,27 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   <section class="hero" id="top">
     <div class="wrap hero__grid">
       <div>
-        <p class="eyebrow"><span class="ar" lang="ar">فضة ٩٢٥ · شغل يد</span><span class="en" lang="en">925 Silver · Handmade</span></p>
+        <!-- The promise is the craft, not the metal. He works in silver, gold
+             and copper, so the material moved out of the headline and into the
+             customer's hands; the strip below answers the question the headline
+             poses. Capability is advertised and nothing else is claimed — no
+             karat, no hallmarking, no gold pricing. See ROUND-3.md §0. -->
         <h1>
-          <span class="ar" lang="ar">فضة ٩٢٥ شغل يد، بالشكل اللي تحبه</span>
-          <span class="en" lang="en">Handmade 925 silver, made to your design</span>
+          <span class="ar" lang="ar">أي تصميم، شغل يد، بالخامة اللي تختارها</span>
+          <span class="en" lang="en">Any design, handmade, in the material you choose</span>
         </h1>
+        <p class="metals" id="metals">
+          <span class="ar" lang="ar">فضة ٩٢٥ · ذهب · نحاس</span>
+          <span class="en" lang="en">925 Silver · Gold · Copper</span>
+        </p>
         <p class="hero__sub">
-          <span class="ar" lang="ar">اتفرج على التصاميم واطلب قطعتك بالاسم أو الشكل اللي يناسبك. ورشتنا في الهرم من سنة ١٩٩٧.</span>
-          <span class="en" lang="en">Browse the styles, then order your piece with your own name or design. Our workshop has been in El Haram since 1997.</span>
+          <span class="ar" lang="ar">فضة ٩٢٥، ذهب، ونحاس. اختار شكل من التصاميم أو ابعت لنا فكرتك، وننفذها بالاسم والمقاس اللي يناسبك. ورشتنا في الهرم من سنة ١٩٩٧.</span>
+          <span class="en" lang="en">925 silver, gold and copper. Pick a style from the gallery or send us your own idea, and we'll make it with your name and your size. Our workshop has been in El Haram since 1997.</span>
         </p>
 
         <div class="hero__cta">
           <a class="btn btn--primary btn--lg" href="#designs">
-            <span class="ar" lang="ar">تصفح التصاميم</span><span class="en" lang="en">Browse designs</span>
+            <span class="ar" lang="ar">استعرض التصاميم</span><span class="en" lang="en">Browse designs</span>
           </a>
           <a class="btn btn--ghost btn--lg" data-wa="generic" href="#" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A9.9 9.9 0 1 0 12 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.1Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3A2.9 2.9 0 0 0 6.9 12a8.9 8.9 0 0 0 3.6 3.9c1.7 1 2.2 1 2.9 1a2.6 2.6 0 0 0 1.8-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>
@@ -716,17 +763,27 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
         </div>
       </div>
 
+      <!-- The bench photo moved to About and one of the 12 real tray shots
+           leads instead: they are the only high-resolution assets in the
+           project and they carry the colour the page was missing. The hedge
+           TIGHTENS here rather than relaxing, because hero placement implies
+           ownership far more strongly than a gallery tile does — their
+           provenance is inferred, not confirmed. So the caption describes the
+           STYLE, and nothing says "our stock", "our work" or "available".
+           Still capped at 400px: sharper does not mean bigger. -->
       <figure class="frame" style="margin:0">
         <picture>
-          <source type="image/webp" srcset="assets/workshop.webp">
-          <img src="assets/workshop.jpg" width="800" height="800" fetchpriority="high" decoding="async"
-               alt="إيد بتمسك قطعة فضة مقصوصة بالمنشار على منضدة الورشة، وجنبها منشار الصايغ وقطع فضة تحت التشغيل"
-               data-alt-ar="إيد بتمسك قطعة فضة مقصوصة بالمنشار على منضدة الورشة، وجنبها منشار الصايغ وقطع فضة تحت التشغيل"
-               data-alt-en="A hand holding a hand-sawn silver piece at the bench, next to a jeweller's saw and part-finished blanks">
+          <source type="image/webp" srcset="assets/designs/eb-029-400.webp 400w, assets/designs/eb-029.webp 800w" sizes="400px">
+          <img src="assets/designs/eb-029-400.jpg"
+               srcset="assets/designs/eb-029-400.jpg 400w, assets/designs/eb-029.jpg 800w" sizes="400px"
+               width="800" height="800" fetchpriority="high" decoding="async"
+               alt="مجموعة دلايات جعران فضة مترصعة بالفيروز واللازورد والمرجان"
+               data-alt-ar="مجموعة دلايات جعران فضة مترصعة بالفيروز واللازورد والمرجان"
+               data-alt-en="A group of silver scarab pendants inlaid with turquoise, lapis and coral">
         </picture>
         <figcaption>
-          <span class="ar" lang="ar">من الورشة — قص وتشكيل بالإيد</span>
-          <span class="en" lang="en">In the workshop — cut and shaped by hand</span>
+          <span class="ar" lang="ar">جعارين فرعوني بالتطعيم — شكل من التصاميم اللي تقدر تطلبها</span>
+          <span class="en" lang="en">Pharaonic scarabs with stone inlay — one of the styles you can order</span>
         </figcaption>
       </figure>
     </div>
@@ -735,7 +792,11 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   <!-- ── Gallery ──────────────────────────────────────────────────── -->
   <section class="sec" id="designs" aria-labelledby="designsH">
     <div class="wrap">
-      <p class="eyebrow"><span class="ar" lang="ar">المعرض</span><span class="en" lang="en">The menu</span></p>
+      <!-- "The menu" read restaurant-y in English. Its obvious replacements —
+           Collections, Our Designs, Made by Ebdaa — all assert ownership of
+           photographs that are not his, which is the one thing this site must
+           never do. "Styles" carries no such claim. المعرض is fine and stays. -->
+      <p class="eyebrow"><span class="ar" lang="ar">المعرض</span><span class="en" lang="en">Styles</span></p>
       <h2 class="sec__h" id="designsH">
         <span class="ar" lang="ar">تصاميم تقدر تطلبها</span>
         <span class="en" lang="en">Styles you can order</span>
@@ -752,8 +813,8 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
             <span class="en" lang="en">The gallery needs JavaScript</span>
           </h3>
           <p>
-            <span class="ar" lang="ar">بنعمل شغل فضة ٩٢٥ بالإيد في الأنواع دي:</span>
-            <span class="en" lang="en">We make handmade 925 silver in these styles:</span>
+            <span class="ar" lang="ar">بنعمل مجوهرات شغل يد — فضة ٩٢٥، ذهب، ونحاس — في الأنواع دي:</span>
+            <span class="en" lang="en">We make handmade jewellery — 925 silver, gold or copper — in these styles:</span>
           </p>
           <ul>
             <li><span class="ar" lang="ar">أسماء وتفصيل — سلاسل، خواتم، دبل، زراير قميص، ميداليات</span><span class="en" lang="en">Names &amp; personalised — pendants, rings, cufflinks, keyrings</span></li>
@@ -785,7 +846,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
         <button class="entry" type="button" data-entry="womens">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M12 15v6M9 18.5h6"/></svg>
           <span>
-            <span class="ar" lang="ar">للستات</span><span class="en" lang="en">For women</span>
+            <span class="ar" lang="ar">حريمي</span><span class="en" lang="en">For women</span>
             <small><span class="ar" lang="ar">سلاسل بالاسم، دلايات، أساور</span><span class="en" lang="en">Name necklaces, pendants, bracelets</span></small>
           </span>
           <svg class="entry__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
@@ -804,6 +865,9 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
       </div>
 
       <ul class="grid" id="grid"></ul>
+      <div class="more" id="moreWrap" hidden>
+        <button class="btn btn--ghost btn--lg" id="moreBtn" type="button"></button>
+      </div>
       <p class="empty" id="empty" hidden></p>
       <p class="sr-only" id="liveCount" role="status" aria-live="polite"></p>
     </div>
@@ -818,7 +882,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
       <ol class="steps">
         <li class="step">
           <span class="step__n" aria-hidden="true"><span class="ar">١</span><span class="en">1</span></span>
-          <p><span class="ar" lang="ar">اختار تصميم من المعرض، أو ابعتلنا فكرتك أو صورة</span><span class="en" lang="en">Pick a style from the gallery, or send us your own idea or photo</span></p>
+          <p><span class="ar" lang="ar">اختار تصميم من المعرض، أو ابعت لنا فكرتك أو صورة</span><span class="en" lang="en">Pick a style from the gallery, or send us your own idea or photo</span></p>
         </li>
         <li class="step">
           <span class="step__n" aria-hidden="true"><span class="ar">٢</span><span class="en">2</span></span>
@@ -830,9 +894,20 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
         </li>
       </ol>
 
+      <!-- Sizes is a step in ordering, not a destination, so it came out of the
+           nav and is reached from here. The #sizes id is unchanged. -->
+      <p class="order__sizes">
+        <a href="#sizes">
+          <span class="ar" lang="ar">مش متأكد من مقاسك؟ قيسه في نص دقيقة</span>
+          <span class="en" lang="en">Not sure of your size? Measure it in half a minute</span>
+        </a>
+      </p>
+
+      <!-- The metal moved out of the pricing line the moment gold was
+           advertised: it is the price of the MATERIAL that day, not of silver. -->
       <p class="note">
-        <span class="ar" lang="ar">التسعير حسب وزن القطعة وسعر الفضة يوم الطلب، زائد أجر التصنيع. ابعتلنا الفكرة ونقولك السعر.</span>
-        <span class="en" lang="en">Pricing depends on the weight of the piece and the silver price that day, plus the making charge. Send us your idea and we'll quote you.</span>
+        <span class="ar" lang="ar">التسعير حسب وزن القطعة وسعر الخامة يوم الطلب، زائد أجر التصنيع. ابعت لنا الفكرة ونقولك السعر.</span>
+        <span class="en" lang="en">Pricing depends on the weight of the piece and the price of the material that day, plus the making charge. Send us your idea and we'll quote you.</span>
       </p>
     </div>
   </section>
@@ -848,7 +923,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
       <p class="eyebrow"><span class="ar" lang="ar">قبل ما تطلب</span><span class="en" lang="en">Before you order</span></p>
       <h2 class="sec__h" id="sizesH"><span class="ar" lang="ar">المقاسات</span><span class="en" lang="en">Sizes</span></h2>
       <p class="sec__sub">
-        <span class="ar" lang="ar">مش عارف مقاسك؟ قيسه في نص دقيقة بخيط ومسطرة.</span>
+        <span class="ar" lang="ar">مش متأكد من مقاسك؟ قيسه في نص دقيقة بخيط ومسطرة.</span>
         <span class="en" lang="en">Not sure of your size? Measure it in half a minute with a thread and a ruler.</span>
       </p>
 
@@ -858,7 +933,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
             <li><span class="ar" lang="ar">لف خيط أو شريط ورق حوالين صباعك، من غير شد.</span><span class="en" lang="en">Wrap a thread or a paper strip around your finger, without pulling it tight.</span></li>
             <li><span class="ar" lang="ar">علّم بالقلم مكان ما الخيط يتقاطع مع نفسه.</span><span class="en" lang="en">Mark with a pen where the thread crosses itself.</span></li>
             <li><span class="ar" lang="ar">افرد الخيط وقيس لغاية العلامة بالمسطرة بالمليمتر.</span><span class="en" lang="en">Unwrap it and measure up to the mark with a ruler, in millimetres.</span></li>
-            <li><span class="ar" lang="ar">ابعتلنا الرقم ده على واتساب مع طلبك.</span><span class="en" lang="en">Send us that number on WhatsApp along with your order.</span></li>
+            <li><span class="ar" lang="ar">ابعت لنا الرقم ده على واتساب مع طلبك.</span><span class="en" lang="en">Send us that number on WhatsApp along with your order.</span></li>
           </ol>
 
           <svg class="sizes__dia" viewBox="0 0 320 132" fill="none" role="img"
@@ -902,11 +977,23 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   </section>
 
   <!-- ── Services ─────────────────────────────────────────────────── -->
-  <section class="sec" id="services" aria-labelledby="svcH">
+  <!-- Banding after the copper band was cut: ivory · ivory · sand · ivory ·
+       sand · ivory · sand · ivory down the page. One flat ivory top to bottom
+       is what actually read as "pale" in round 2, and that fix stands. -->
+  <section class="sec sec--sand" id="services" aria-labelledby="svcH">
     <div class="wrap">
       <p class="eyebrow"><span class="ar" lang="ar">الورشة</span><span class="en" lang="en">Workshop</span></p>
       <h2 class="sec__h" id="svcH"><span class="ar" lang="ar">خدماتنا</span><span class="en" lang="en">Our services</span></h2>
 
+      <!-- These four are worded exactly as they were, and that is deliberate.
+           The obvious move is to broaden "تصليح الفضة" to plain "تصليح" so it
+           matches the new headline — do not. What Emad confirmed was SILVER
+           repair; dropping the word implies he repairs gold, which carries the
+           same hallmarking exposure as making it. Only custom making is
+           confirmed multi-material, and the JSON-LD makesOffer entries are
+           unchanged for the same reason. No material line above the list
+           either: any wording precise enough to be safe would claim something
+           about polishing and stone setting that nobody has confirmed. -->
       <ul class="svcs">
         <li class="svc">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.6 6.4 3 3M3 21l6.3-6.3M12.8 4.2l7 7-2.4 2.4-7-7ZM8.2 8.8l7 7-2.9 2.9-7-7Z"/></svg>
@@ -929,7 +1016,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   </section>
 
   <!-- ── Wholesale ────────────────────────────────────────────────── -->
-  <section class="sec sec--copper" id="wholesale" aria-labelledby="whH">
+  <section class="sec sec--aside" id="wholesale" aria-labelledby="whH">
     <div class="wrap">
       <div class="panel panel--split">
         <div>
@@ -949,36 +1036,40 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
   </section>
 
   <!-- ── About ────────────────────────────────────────────────────── -->
-  <section class="sec" id="about" aria-labelledby="aboutH">
+  <section class="sec sec--sand" id="about" aria-labelledby="aboutH">
     <div class="wrap about__grid">
       <div>
         <p class="eyebrow"><span class="ar" lang="ar">من ١٩٩٧</span><span class="en" lang="en">Since 1997</span></p>
         <h2 class="sec__h" id="aboutH"><span class="ar" lang="ar">عن إبداع</span><span class="en" lang="en">About Ebdaa</span></h2>
         <p class="sec__sub">
-          <span class="ar" lang="ar">إبداع للمجوهرات متخصصة في تصنيع الفضة من سنة ١٩٩٧. شغل يد بالكامل في ورشتنا في الهرم، بالتعاون مع صنايعية من الجيل القديم في خان الخليلي.</span>
-          <span class="en" lang="en">Ebdaa has specialised in silver since 1997. Everything is made by hand in our workshop in El Haram, with craftsmen from the older generation in Khan el-Khalili.</span>
+          <span class="ar" lang="ar">إبداع للمجوهرات متخصصة في تصنيع المجوهرات شغل يد من سنة ١٩٩٧. شغل يد بالكامل في ورشتنا في الهرم، بالتعاون مع صنايعية من الجيل القديم في خان الخليلي.</span>
+          <span class="en" lang="en">Ebdaa has specialised in handmade jewellery since 1997. Everything is made by hand in our workshop in El Haram, with craftsmen from the older generation in Khan el-Khalili.</span>
         </p>
       </div>
+      <!-- The workshop photograph moved down from the hero. It is authentic but
+           it sells manufacturing rather than desire, and this is where a craft
+           photograph belongs. It is also one of the few genuinely in-house
+           images in the project, which is exactly why it suits About. -->
       <figure style="margin:0">
         <div class="about__img">
           <picture>
-            <source type="image/webp" srcset="assets/bench.webp">
-            <img src="assets/bench.jpg" width="1200" height="549" loading="lazy" decoding="async"
-                 alt="منضدة صايغ خشب بأدراج في الورشة"
-                 data-alt-ar="منضدة صايغ خشب بأدراج في الورشة"
-                 data-alt-en="A wooden jeweller's bench with drawers in the workshop">
+            <source type="image/webp" srcset="assets/workshop.webp">
+            <img src="assets/workshop.jpg" width="800" height="800" loading="lazy" decoding="async"
+                 alt="إيد بتمسك قطعة فضة مقصوصة بالمنشار على منضدة الورشة، وجنبها منشار الصايغ وقطع فضة تحت التشغيل"
+                 data-alt-ar="إيد بتمسك قطعة فضة مقصوصة بالمنشار على منضدة الورشة، وجنبها منشار الصايغ وقطع فضة تحت التشغيل"
+                 data-alt-en="A hand holding a hand-sawn silver piece at the bench, next to a jeweller's saw and part-finished blanks">
           </picture>
         </div>
         <figcaption class="about__cap">
-          <span class="ar" lang="ar">منضدة الشغل في ورشة الهرم</span>
-          <span class="en" lang="en">The bench at the El Haram workshop</span>
+          <span class="ar" lang="ar">من الورشة — قص وتشكيل بالإيد</span>
+          <span class="en" lang="en">In the workshop — cut and shaped by hand</span>
         </figcaption>
       </figure>
     </div>
   </section>
 
   <!-- ── Contact ──────────────────────────────────────────────────── -->
-  <section class="sec sec--sand" id="contact" aria-labelledby="contactH">
+  <section class="sec" id="contact" aria-labelledby="contactH">
     <div class="wrap">
       <p class="eyebrow"><span class="ar" lang="ar">تواصل</span><span class="en" lang="en">Reach us</span></p>
       <h2 class="sec__h" id="contactH"><span class="ar" lang="ar">كلمنا</span><span class="en" lang="en">Get in touch</span></h2>
@@ -1033,8 +1124,14 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
           <span class="ar" lang="ar">إبداع للمجوهرات</span><span class="en" lang="en">Ebdaa Jewelry</span>
         </p>
         <p style="color:rgba(237,233,224,.72);font-size:.92rem;margin-block-start:.35rem">
-          <span class="ar" lang="ar">فضة ٩٢٥ شغل يد · الهرم، الجيزة · من ١٩٩٧</span>
-          <span class="en" lang="en">Handmade 925 silver · El Haram, Giza · Since 1997</span>
+          <span class="ar" lang="ar">شغل يد · الهرم، الجيزة · من ١٩٩٧</span>
+          <span class="en" lang="en">Handmade · El Haram, Giza · Since 1997</span>
+        </p>
+        <!-- Wholesale came out of the primary nav: shops and traders are a
+             secondary audience and should not compete with the customer path.
+             The section and its #wholesale id are untouched. -->
+        <p class="ftr__links">
+          <a href="#wholesale"><span class="ar" lang="ar">تصنيع بالجملة</span><span class="en" lang="en">Wholesale</span></a>
         </p>
       </div>
       <div class="ftr__acts">
@@ -1082,6 +1179,9 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
     <div class="lb__body">
       <h3 class="lb__t" id="lbT"></h3>
       <p class="lb__d" id="lbD"></p>
+      <!-- The materials answer belongs where the question actually occurs —
+           the same reasoning that put the pricing line in here in session 2. -->
+      <p class="lb__mat" id="lbMat"></p>
       <a class="btn btn--primary btn--lg lb__cta" id="lbCta" href="#" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A9.9 9.9 0 1 0 12 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.1Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3A2.9 2.9 0 0 0 6.9 12a8.9 8.9 0 0 0 3.6 3.9c1.7 1 2.2 1 2.9 1a2.6 2.6 0 0 0 1.8-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>
         <span id="lbCtaT"></span>
@@ -1125,7 +1225,7 @@ var TEL = "+201149030164";
    order, interleaved so the colour is not all at the bottom of the grid. */
 var DESIGNS = [
   { id:"eb-029", img:"assets/designs/eb-029", types:["pendants"], categories:["pharaonic"],
-    title_ar:"جعارين فضة بأحجار ملونة", title_en:"Silver scarabs with coloured stones",
+    title_ar:"جعارين بأحجار ملونة", title_en:"Scarabs with coloured stones",
     alt_ar:"مجموعة دلايات جعران فضة مترصعة بالفيروز واللازورد والمرجان",
     alt_en:"A group of silver scarab pendants inlaid with turquoise, lapis and coral" },
 
@@ -1215,7 +1315,7 @@ var DESIGNS = [
     alt_en:"A round silver keyring with an Arabic name cut out in interlaced script" },
 
   { id:"eb-021", img:"assets/designs/eb-021", types:["bracelets"], categories:["mens","names"],
-    title_ar:"أسورة جلد بخرزات فضة", title_en:"Leather bracelet with engraved silver beads",
+    title_ar:"أسورة جلد بخرزات منقوشة", title_en:"Leather bracelet with engraved beads",
     alt_ar:"أسورة جلد أسود مجدول بتلات خرزات فضة منقوش عليها أسماء، في إيد راجل",
     alt_en:"A braided black leather bracelet with three engraved silver name beads, on a man's wrist" },
 
@@ -1290,7 +1390,7 @@ var DESIGNS = [
     alt_en:"A round silver pendant engraved with a Qur'anic verse, on a chain against blue fabric" },
 
   { id:"eb-023", img:"assets/designs/eb-023", types:["rings"], categories:["mens","couples"],
-    title_ar:"دبلة فضة مطروقة", title_en:"Hammered silver band",
+    title_ar:"دبلة مطروقة", title_en:"Hammered band",
     alt_ar:"دبلة فضة عريضة بسطح مطروق ومطفي، وعليها ختم ٩٢٥",
     alt_en:"A wide silver band with a hammered matte surface, stamped 925" },
 
@@ -1300,7 +1400,7 @@ var DESIGNS = [
     alt_en:"A silver keyring with an engraved plate carrying a date and a cut-out heart, and a name tag" },
 
   { id:"eb-016", img:"assets/designs/eb-016", types:["pendants"], categories:["pharaonic","names"],
-    title_ar:"خرطوش فرعوني فضة وذهب", title_en:"Cartouche pendant in silver and gold",
+    title_ar:"خرطوش فرعوني بلونين", title_en:"Two-tone cartouche pendant",
     alt_ar:"دلاية خرطوش فضة برموز هيروغليفية ذهبي وأطراف مفرودة، على سطح خشب",
     alt_en:"A silver cartouche pendant with gold hieroglyphs and flared ends, on a wooden surface" },
 
@@ -1388,13 +1488,15 @@ var CATEGORIES = [
 /* ── Strings that live outside the two-span pattern ─────────────────── */
 var T = {
   ar:{
-    title:"إبداع للمجوهرات — فضة ٩٢٥ شغل يد، الهرم، الجيزة",
-    desc:"تصنيع الفضة عيار ٩٢٥ شغل يد حسب طلبك: أسماء، فرعوني، رجالي، أندية، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧. كلمنا على واتساب.",
-    cardCta:"اطلب شكل زي ده",
+    title:"إبداع للمجوهرات — مجوهرات شغل يد، الهرم، الجيزة",
+    desc:"تصنيع مجوهرات شغل يد حسب طلبك — فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧. كلمنا على واتساب.",
     lbCta:"كلمنا عن التصميم ده",
+    /* the standing materials line, in the one place the question occurs */
+    materials:"أي تصميم ينفذ بالفضة أو الذهب أو النحاس، على حسب طلبك.",
+    more:"شوف كمان",
     askT:"مش لاقي الشكل اللي في بالك؟",
-    askB:"ابعتلنا صورة أو فكرة وإحنا ننفذها. أي اسم، أي مقاس، أي تفصيلة.",
-    askCta:"ابعتلنا فكرتك",
+    askB:"ابعت لنا صورة أو فكرة وإحنا ننفذها. أي اسم، أي مقاس، أي تفصيلة.",
+    askCta:"ابعت لنا فكرتك",
     empty:"مفيش تصاميم في القسم ده دلوقتي — بس ده مش معناه إننا مبنعملهوش. كلمنا وقولنا على فكرتك.",
     /* two axes make an empty result much likelier, so the line names what is
        actually filtered instead of saying "this category" */
@@ -1405,8 +1507,9 @@ var T = {
     photoNext:"الصورة التالية",
     photo:"صورة",
     /* same approved wording as the How-to-order section, repeated where the
-       "can I afford this?" question actually occurs */
-    price:"التسعير حسب وزن القطعة وسعر الفضة يوم الطلب، زائد أجر التصنيع.",
+       "can I afford this?" question actually occurs. سعر الفضة → سعر الخامة:
+       the moment gold is advertised the old wording is simply wrong. */
+    price:"التسعير حسب وزن القطعة وسعر الخامة يوم الطلب، زائد أجر التصنيع.",
     count:"تصميم معروض",
     of:"من",
     prev:"التصميم السابق",
@@ -1415,10 +1518,11 @@ var T = {
     openLb:"كبّر الصورة"
   },
   en:{
-    title:"Ebdaa Jewelry — Handmade 925 silver, El Haram, Giza",
-    desc:"Handmade 925 silver made to order: names, pharaonic, men's, football clubs and gifts. Our workshop has been in El Haram since 1997. Message us on WhatsApp.",
-    cardCta:"Request this style",
+    title:"Ebdaa Jewelry — Handmade jewellery, El Haram, Giza",
+    desc:"Handmade jewellery made to order in 925 silver, gold or copper: names, pharaonic, men's and gifts. Our workshop has been in El Haram since 1997. Message us on WhatsApp.",
     lbCta:"Ask about this style",
+    materials:"Any of these can be made in silver, gold or copper — your choice.",
+    more:"Show more",
     askT:"Can't find the one you had in mind?",
     askB:"Send us a photo or an idea and we'll make it. Any name, any size, any detail.",
     askCta:"Send us your idea",
@@ -1429,7 +1533,7 @@ var T = {
     photoPrev:"Previous photo",
     photoNext:"Next photo",
     photo:"Photo",
-    price:"Pricing depends on the weight of the piece and the silver price that day, plus the making charge.",
+    price:"Pricing depends on the weight of the piece and the price of the material that day, plus the making charge.",
     count:"styles shown",
     of:"of",
     prev:"Previous style",
@@ -1451,9 +1555,12 @@ function waLink(kind, styleName){
       ? "مرحباً، حابب أستفسر عن " + styleName + ". ممكن تعملوا شكل زي ده؟"
       : "Hello, I'd like to ask about " + styleName + ". Can you make something like this?";
   } else {
+    /* The generic prefill named silver, which is now too narrow — this is the
+       customer's own opening message and it shouldn't presume the metal before
+       they've chosen one. */
     msg = LANG === "ar"
-      ? "مرحباً، حابب أستفسر عن تفصيل قطعة فضة."
-      : "Hello, I'd like to ask about ordering a custom silver piece.";
+      ? "مرحباً، حابب أستفسر عن تفصيل قطعة."
+      : "Hello, I'd like to ask about ordering a custom piece.";
   }
   return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
 }
@@ -1570,6 +1677,9 @@ function buildChips(boxId, list, param, current, onPick){
 }
 
 function afterPick(){
+  /* every filter change resets the reveal, so going back to All starts at 12
+     again rather than leaving the grid wherever the last visitor left it */
+  revealed = STEP;
   syncUrl();
   renderChips();
   renderGrid();
@@ -1592,11 +1702,18 @@ function cardMarkup(d){
   var alt = d["alt_" + LANG];
   var li = document.createElement("li");
   var p = esc(photos(d)[0]);   /* escaped too: entries get added by copy-paste */
-  var sizes = '(min-width:920px) 400px, (min-width:560px) 45vw, 92vw';
+  /* two columns from the narrowest phone up, so a tile is never wider than
+     about half the viewport until the 3-column desktop grid */
+  var sizes = '(min-width:920px) 400px, 46vw';
   li.className = "card";
   /* No aria-label on the button: its accessible name comes from the image alt
      plus the hidden action text, so a screen reader reads the piece once
      rather than announcing the label and the alt back to back. */
+  /* Round 3: image + title, and the tile opens the lightbox. The WhatsApp CTA
+     that used to sit under every card is gone — it is still in the lightbox,
+     the header, the hero, wholesale, contact, the footer and the sticky mobile
+     button, so it is not becoming hard to reach, and repeating it 47 times is
+     what made the grid read as noisy. */
   li.innerHTML =
     '<button class="card__media" type="button">' +
       '<picture>' +
@@ -1611,10 +1728,6 @@ function cardMarkup(d){
     '</button>' +
     '<div class="card__body">' +
       '<h3 class="card__t">' + esc(t) + '</h3>' +
-      '<a class="card__cta" data-wa="style" data-style="' + esc(t) + '" href="' + esc(waLink("style", t)) + '" target="_blank" rel="noopener">' +
-        '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A9.9 9.9 0 1 0 12 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.1Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5c0-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3A2.9 2.9 0 0 0 6.9 12a8.9 8.9 0 0 0 3.6 3.9c1.7 1 2.2 1 2.9 1a2.6 2.6 0 0 0 1.8-1.2 2.1 2.1 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3Z"/></svg>' +
-        '<span>' + esc(T[LANG].cardCta) + '</span>' +
-      '</a>' +
     '</div>';
   li.querySelector(".card__media").addEventListener("click", function(){
     openLightbox(visible.indexOf(d));
@@ -1636,19 +1749,43 @@ function askCard(){
   return li;
 }
 
+/* Progressive reveal. All 47 designs stay in the array — this defers them, it
+   does not delete them. One column at 360px made the gallery 21,239px tall,
+   about 29 screens, and everything below Designs sat behind it. */
+var STEP = 12;
+var revealed = STEP;
+
+function isFiltered(){ return FILTER !== "all" || TFILTER !== "all"; }
+
 function renderGrid(){
   var grid = document.getElementById("grid");
   var empty = document.getElementById("empty");
+  var moreWrap = document.getElementById("moreWrap");
+  var moreBtn = document.getElementById("moreBtn");
   /* AND across the two rows, OR within a row */
   visible = DESIGNS.filter(function(d){
     var okC = FILTER === "all" || (d.categories || []).indexOf(FILTER) !== -1;
     var okT = TFILTER === "all" || (d.types || []).indexOf(TFILTER) !== -1;
     return okC && okT;
   });
+  /* A filtered set is NEVER truncated. Picking خواتم and still hiding half the
+     rings behind a button would make the two-axis filter feel broken, and it is
+     why ?c= / ?t= deep links land fully revealed. Only the unfiltered catalogue
+     is deferred. */
+  var cap = isFiltered() ? visible.length : Math.min(revealed, visible.length);
+  var rest = visible.length - cap;
+
   grid.innerHTML = "";
-  visible.forEach(function(d){ grid.appendChild(cardMarkup(d)); });
-  /* the grid is never left empty: the ask card is always the last tile */
-  grid.appendChild(askCard());
+  for (var i = 0; i < cap; i++) grid.appendChild(cardMarkup(visible[i]));
+  /* the ask card is the TAIL of the grid, so it belongs there only once there
+     is nothing left to reveal — including when a filter returns nothing, which
+     is the case that must never leave an empty grid */
+  if (!rest) grid.appendChild(askCard());
+
+  moreWrap.hidden = rest === 0;
+  /* the button reports what is still waiting: hiding the depth of the catalogue
+     is the main risk of this pattern */
+  moreBtn.textContent = T[LANG].more + " (" + digits(rest) + ")";
 
   /* name the active filters, since with two axes "this category" is ambiguous */
   var names = [];
@@ -1658,7 +1795,10 @@ function renderGrid(){
     ? T[LANG].emptyIn.replace("{f}", names.join(" + "))
     : T[LANG].empty;
   empty.hidden = visible.length > 0;
-  /* filtering swaps the content silently for a screen reader otherwise */
+  /* filtering swaps the content silently for a screen reader otherwise. This
+     announces the TOTAL matching count, not the revealed one: what a listener
+     needs to know is how much the filter found, not how much the button has
+     let through so far. */
   document.getElementById("liveCount").textContent =
     digits(visible.length) + " " + T[LANG].count;
 }
@@ -1700,6 +1840,9 @@ function paintLightbox(){
   var cta = document.getElementById("lbCta");
   cta.href = waLink("style", t);
   document.getElementById("lbCtaT").textContent = T[LANG].lbCta;
+  /* every photograph on the site happens to be silver; this is what stops that
+     reading as a limit on what can be ordered */
+  document.getElementById("lbMat").textContent = T[LANG].materials;
   document.getElementById("lbPrice").textContent = T[LANG].price;
   document.getElementById("lbCount").textContent =
     digits(LB.i + 1) + " " + T[LANG].of + " " + digits(visible.length);
@@ -1881,6 +2024,25 @@ document.getElementById("langBtn").addEventListener("click", function(){
 });
 
 document.getElementById("mm").addEventListener("input", paintSizes);
+
+/* Reveal 12 more. If that was the last of them the button disappears, so focus
+   moves to the first tile that just appeared rather than being dropped on the
+   body — a keyboard user must not lose their place. */
+document.getElementById("moreBtn").addEventListener("click", function(){
+  var firstNew = revealed;
+  revealed += STEP;
+  renderGrid();
+  if (document.getElementById("moreWrap").hidden){
+    var cards = document.querySelectorAll("#grid .card__media");
+    if (cards[firstNew]) cards[firstNew].focus();
+  }
+});
+
+/* Someone printing this to carry to the workshop should get the whole
+   catalogue, not the first twelve. */
+window.addEventListener("beforeprint", function(){
+  if (!isFiltered() && revealed < DESIGNS.length){ revealed = DESIGNS.length; renderGrid(); }
+});
 
 /* Entry cards: pre-apply one design filter and scroll to the grid. Not a
    section split — a hard gender split would force every piece into a bucket,
