@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>إبداع للمجوهرات — مجوهرات شغل يد، الهرم، الجيزة</title>
-<meta name="description" content="تصنيع مجوهرات شغل يد حسب طلبك — فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧. كلمنا على واتساب.">
+<title>إبداع للمجوهرات · مجوهرات شغل يد، الهرم، الجيزة</title>
+<meta name="description" content="تصنيع مجوهرات شغل يد حسب طلبك: فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧. كلمنا على واتساب.">
 <meta name="theme-color" content="#F5F0E7">
 
 <!-- ─────────────────────────────────────────────────────────────────────
@@ -26,15 +26,15 @@
 </script>
 
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="إبداع للمجوهرات — Ebdaa Jewelry">
-<meta property="og:title" content="إبداع للمجوهرات — مجوهرات شغل يد">
-<meta property="og:description" content="تصنيع مجوهرات شغل يد حسب طلبك — فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧.">
+<meta property="og:site_name" content="إبداع للمجوهرات · Ebdaa Jewelry">
+<meta property="og:title" content="إبداع للمجوهرات · مجوهرات شغل يد">
+<meta property="og:description" content="تصنيع مجوهرات شغل يد حسب طلبك: فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧.">
 <meta property="og:locale" content="ar_EG">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:image" content="assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="إبداع للمجوهرات — مجوهرات شغل يد، الهرم، الجيزة">
+<meta property="og:image:alt" content="إبداع للمجوهرات · مجوهرات شغل يد، الهرم، الجيزة">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -263,31 +263,6 @@ html[lang="en"] .hero h1{max-width:17ch}
 .frame img{border-radius:var(--r);aspect-ratio:1;object-fit:cover;width:100%;height:auto}
 .frame figcaption{margin-block-start:.7rem;font-size:.78rem;color:var(--muted);text-align:start;line-height:1.5}
 
-/* ── Entry cards ────────────────────────────────────────────────────── */
-/* Not a section split. These pre-apply the design filter and scroll to the
-   grid, which gives the feeling of having sections without forcing every
-   piece into a gender bucket — a name necklace is a name necklace. */
-/* one column below 560px: two grid items with min-width:auto pushed 31px of
-   horizontal scroll onto a 320px phone, and WCAG 1.4.10 says no */
-.entries{display:grid;gap:.85rem;grid-template-columns:1fr;margin-block-start:1.9rem}
-@media (min-width:560px){.entries{grid-template-columns:repeat(2,1fr)}}
-.entry{
-  display:flex;align-items:center;gap:.85rem;
-  min-height:64px;padding:.85rem 1.1rem;text-align:start;
-  /* the label hugs the leading edge; the chevron holds the trailing one */
-  /* still bounded, because these two are real controls — round 3 de-carded the
-     things that only *looked* like containers, not the ones you press */
-  background:transparent;border:1px solid var(--line-strong);border-radius:var(--r);
-  font:inherit;font-weight:700;font-size:1rem;color:var(--charcoal);cursor:pointer;
-  transition:border-color .18s var(--ease),background-color .18s var(--ease);
-}
-.entry:hover{border-color:var(--copper)}
-.entry svg{width:26px;height:26px;flex:none;color:var(--copper-text)}
-.entry small{display:block;font-weight:400;font-size:.82rem;color:var(--muted);line-height:1.4}
-.entry > span{min-width:0}
-.entry__go{margin-inline-start:auto;width:20px;height:20px;color:var(--muted)}
-html[dir="rtl"] .entry__go{transform:scaleX(-1)}
-
 /* ── Chips + gallery ────────────────────────────────────────────────── */
 /* Two orthogonal axes: type (what it is) then design (what it looks like).
    AND across the rows, OR within a row. Each row is labelled, otherwise two
@@ -449,7 +424,9 @@ html[dir="rtl"] .sizes__dia{transform:scaleX(-1)}
   margin-block-start:1.1rem;padding-block-start:1rem;border-block-start:1px solid var(--line);
 }
 .calc__k{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.calc__v{font-size:1.5rem;font-weight:700;color:var(--copper-text)}
+/* inline-block with a floor so the row keeps its height while the readout is
+   empty, otherwise entering the first number shifts the layout */
+.calc__v{display:inline-block;min-height:1.6em;font-size:1.5rem;font-weight:700;color:var(--copper-text)}
 .calc__hint{margin-block-start:.6rem;font-size:.85rem;color:var(--muted);min-height:1.3em}
 .calc__note{margin-block-start:1rem;font-size:.88rem;line-height:1.6;color:var(--muted)}
 
@@ -641,7 +618,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
    relative. Drop the furniture, keep the styles and the phone number, and
    spell out the WhatsApp number since a tap target means nothing on paper. */
 @media print{
-  .hdr,.nav,.sticky-wa,.lb,.skip,.filters,.entries,.hero__cta,.ftr__acts,.more{display:none!important}
+  .hdr,.nav,.sticky-wa,.lb,.skip,.filters,.hero__cta,.ftr__acts,.more{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   .sec,.hero{padding-block:1rem;border:0}
   .sec--sand{background:#fff}
@@ -782,8 +759,8 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
                data-alt-en="A group of silver scarab pendants inlaid with turquoise, lapis and coral">
         </picture>
         <figcaption>
-          <span class="ar" lang="ar">جعارين فرعوني بالتطعيم — شكل من التصاميم اللي تقدر تطلبها</span>
-          <span class="en" lang="en">Pharaonic scarabs with stone inlay — one of the styles you can order</span>
+          <span class="ar" lang="ar">جعارين فرعوني بالتطعيم، شكل من التصاميم اللي تقدر تطلبها</span>
+          <span class="en" lang="en">Pharaonic scarabs with stone inlay, one of the styles you can order</span>
         </figcaption>
       </figure>
     </div>
@@ -813,15 +790,15 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
             <span class="en" lang="en">The gallery needs JavaScript</span>
           </h3>
           <p>
-            <span class="ar" lang="ar">بنعمل مجوهرات شغل يد — فضة ٩٢٥، ذهب، ونحاس — في الأنواع دي:</span>
-            <span class="en" lang="en">We make handmade jewellery — 925 silver, gold or copper — in these styles:</span>
+            <span class="ar" lang="ar">بنعمل مجوهرات شغل يد بالفضة ٩٢٥ والذهب والنحاس، في الأنواع دي:</span>
+            <span class="en" lang="en">We make handmade jewellery in 925 silver, gold or copper, in these styles:</span>
           </p>
           <ul>
-            <li><span class="ar" lang="ar">أسماء وتفصيل — سلاسل، خواتم، دبل، زراير قميص، ميداليات</span><span class="en" lang="en">Names &amp; personalised — pendants, rings, cufflinks, keyrings</span></li>
-            <li><span class="ar" lang="ar">فرعوني — خراطيش بالاسم بالهيروغليفي، وتمائم بالتطعيم</span><span class="en" lang="en">Pharaonic — cartouches with your name in hieroglyphs, and inlaid amulets</span></li>
-            <li><span class="ar" lang="ar">رجالي — خواتم، أساور، دلايات، زراير قميص</span><span class="en" lang="en">Men's — rings, bracelets, pendants, cufflinks</span></li>
-            <li><span class="ar" lang="ar">حريمي — سلاسل بالاسم، أساور، دلايات</span><span class="en" lang="en">Women's — name necklaces, bracelets, pendants</span></li>
-            <li><span class="ar" lang="ar">أندية — شعارات الأندية</span><span class="en" lang="en">Football clubs — club crests</span></li>
+            <li><span class="ar" lang="ar">أسماء وتفصيل: سلاسل، خواتم، دبل، زراير قميص، ميداليات</span><span class="en" lang="en">Names &amp; personalised: pendants, rings, cufflinks, keyrings</span></li>
+            <li><span class="ar" lang="ar">فرعوني: خراطيش بالاسم بالهيروغليفي، وتمائم بالتطعيم</span><span class="en" lang="en">Pharaonic: cartouches with your name in hieroglyphs, and inlaid amulets</span></li>
+            <li><span class="ar" lang="ar">رجالي: خواتم، أساور، دلايات، زراير قميص</span><span class="en" lang="en">Men's: rings, bracelets, pendants, cufflinks</span></li>
+            <li><span class="ar" lang="ar">حريمي: سلاسل بالاسم، أساور، دلايات</span><span class="en" lang="en">Women's: name necklaces, bracelets, pendants</span></li>
+            <li><span class="ar" lang="ar">أندية: شعارات الأندية</span><span class="en" lang="en">Football clubs: club crests</span></li>
             <li><span class="ar" lang="ar">دبل وهدايا</span><span class="en" lang="en">Couples &amp; gifts</span></li>
           </ul>
           <p>
@@ -834,25 +811,10 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
         </div>
       </noscript>
 
-      <div class="entries">
-        <button class="entry" type="button" data-entry="mens">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="14" r="6"/><path d="m14.2 9.8 6-6M16 3.8h4.2V8"/></svg>
-          <span>
-            <span class="ar" lang="ar">للرجال</span><span class="en" lang="en">For men</span>
-            <small><span class="ar" lang="ar">خواتم، زراير قميص، أساور</span><span class="en" lang="en">Rings, cufflinks, bracelets</span></small>
-          </span>
-          <svg class="entry__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
-        </button>
-        <button class="entry" type="button" data-entry="womens">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M12 15v6M9 18.5h6"/></svg>
-          <span>
-            <span class="ar" lang="ar">حريمي</span><span class="en" lang="en">For women</span>
-            <small><span class="ar" lang="ar">سلاسل بالاسم، دلايات، أساور</span><span class="en" lang="en">Name necklaces, pendants, bracelets</span></small>
-          </span>
-          <svg class="entry__go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
-        </button>
-      </div>
-
+      <!-- The two entry cards (للرجال / حريمي) were removed in session 5: they
+           sat directly above a design chip row that already carries رجالي and
+           حريمي, so they asked the same question twice. The chips do the job;
+           ?c=mens and ?c=womens still work as links. -->
       <div class="filters">
         <div class="filter-row">
           <p class="filter-row__k" aria-hidden="true"><span class="ar" lang="ar">النوع</span><span class="en" lang="en">Type</span></p>
@@ -964,7 +926,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
               <span class="ar" lang="ar">قطر الخاتم التقريبي</span>
               <span class="en" lang="en">Approximate ring diameter</span>
             </span>
-            <span class="calc__v" id="mmOut" aria-live="polite">—</span>
+            <span class="calc__v" id="mmOut" aria-live="polite"></span>
           </div>
           <p class="calc__hint" id="mmHint"></p>
           <p class="calc__note">
@@ -1001,7 +963,7 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
         </li>
         <li class="svc">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a3.9 3.9 0 0 1 5.3 4.9l-8.4 8.4a2.6 2.6 0 0 1-3.7-3.7l7-7"/><path d="M4 4.6 6.4 3l2.2 3.8-1.3 1.3L3.5 6Z"/></svg>
-          <span class="ar" lang="ar">تصليح الفضة</span><span class="en" lang="en">Silver repair</span>
+          <span class="ar" lang="ar">تصليح</span><span class="en" lang="en">Repair</span>
         </li>
         <li class="svc">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 13.7 8l4.8 1.7-4.8 1.7L12 16.2 10.3 11.4 5.5 9.7 10.3 8Z"/><path d="M18.5 15.5 19.3 18l2.5.8-2.5.8-.8 2.5-.8-2.5L15.2 19l2.5-.8ZM5 2.4l.6 1.8 1.8.6-1.8.6L5 7.2l-.6-1.8-1.8-.6 1.8-.6Z"/></svg>
@@ -1061,8 +1023,8 @@ html[dir="rtl"] .lb__prev svg,html[dir="rtl"] .lb__next svg{transform:scaleX(-1)
           </picture>
         </div>
         <figcaption class="about__cap">
-          <span class="ar" lang="ar">من الورشة — قص وتشكيل بالإيد</span>
-          <span class="en" lang="en">In the workshop — cut and shaped by hand</span>
+          <span class="ar" lang="ar">من الورشة: قص وتشكيل بالإيد</span>
+          <span class="en" lang="en">In the workshop: cut and shaped by hand</span>
         </figcaption>
       </figure>
     </div>
@@ -1266,8 +1228,8 @@ var DESIGNS = [
 
   { id:"eb-035", img:"assets/designs/eb-035", types:["bracelets"], categories:["pharaonic","womens"],
     title_ar:"أساور فرعوني بالتطعيم", title_en:"Pharaonic link bracelets with inlay",
-    alt_ar:"أساور فضة من وحدات فرعوني — عنخ وجعران ولوتس — مطعمة بالفيروز واللازورد",
-    alt_en:"Silver bracelets of pharaonic links — ankh, scarab and lotus — inlaid with turquoise and lapis" },
+    alt_ar:"أساور فضة من وحدات فرعوني (عنخ وجعران ولوتس) مطعمة بالفيروز واللازورد",
+    alt_en:"Silver bracelets of pharaonic links (ankh, scarab and lotus) inlaid with turquoise and lapis" },
 
   { id:"eb-007", img:"assets/designs/eb-007", types:["rings"], categories:["mens"],
     title_ar:"خاتم رجالي بحجر أسود", title_en:"Men's ring with a black stone",
@@ -1488,8 +1450,8 @@ var CATEGORIES = [
 /* ── Strings that live outside the two-span pattern ─────────────────── */
 var T = {
   ar:{
-    title:"إبداع للمجوهرات — مجوهرات شغل يد، الهرم، الجيزة",
-    desc:"تصنيع مجوهرات شغل يد حسب طلبك — فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧. كلمنا على واتساب.",
+    title:"إبداع للمجوهرات · مجوهرات شغل يد، الهرم، الجيزة",
+    desc:"تصنيع مجوهرات شغل يد حسب طلبك: فضة ٩٢٥، ذهب، ونحاس. أسماء، فرعوني، رجالي، وهدايا. ورشتنا في الهرم من سنة ١٩٩٧. كلمنا على واتساب.",
     lbCta:"كلمنا عن التصميم ده",
     /* the standing materials line, in the one place the question occurs */
     materials:"أي تصميم ينفذ بالفضة أو الذهب أو النحاس، على حسب طلبك.",
@@ -1497,10 +1459,10 @@ var T = {
     askT:"مش لاقي الشكل اللي في بالك؟",
     askB:"ابعت لنا صورة أو فكرة وإحنا ننفذها. أي اسم، أي مقاس، أي تفصيلة.",
     askCta:"ابعت لنا فكرتك",
-    empty:"مفيش تصاميم في القسم ده دلوقتي — بس ده مش معناه إننا مبنعملهوش. كلمنا وقولنا على فكرتك.",
+    empty:"مفيش تصاميم في القسم ده دلوقتي، بس ده مش معناه إننا مبنعملهوش. كلمنا وقولنا على فكرتك.",
     /* two axes make an empty result much likelier, so the line names what is
        actually filtered instead of saying "this category" */
-    emptyIn:"مفيش حاجة تحت «{f}» دلوقتي — بس ده مش معناه إننا مبنعملهاش. كلمنا وقولنا على فكرتك.",
+    emptyIn:"مفيش حاجة تحت «{f}» دلوقتي، بس ده مش معناه إننا مبنعملهاش. كلمنا وقولنا على فكرتك.",
     filterLabel:"تصفية التصاميم",
     typeFilterLabel:"تصفية حسب النوع",
     photoPrev:"الصورة السابقة",
@@ -1518,16 +1480,16 @@ var T = {
     openLb:"كبّر الصورة"
   },
   en:{
-    title:"Ebdaa Jewelry — Handmade jewellery, El Haram, Giza",
+    title:"Ebdaa Jewelry · Handmade jewellery, El Haram, Giza",
     desc:"Handmade jewellery made to order in 925 silver, gold or copper: names, pharaonic, men's and gifts. Our workshop has been in El Haram since 1997. Message us on WhatsApp.",
     lbCta:"Ask about this style",
-    materials:"Any of these can be made in silver, gold or copper — your choice.",
+    materials:"Any of these can be made in silver, gold or copper. Your choice.",
     more:"Show more",
     askT:"Can't find the one you had in mind?",
     askB:"Send us a photo or an idea and we'll make it. Any name, any size, any detail.",
     askCta:"Send us your idea",
-    empty:"Nothing in this category just yet — which doesn't mean we can't make it. Message us and tell us what you're after.",
-    emptyIn:"Nothing under “{f}” just yet — which doesn't mean we can't make it. Message us and tell us what you're after.",
+    empty:"Nothing in this category just yet, which doesn't mean we can't make it. Message us and tell us what you're after.",
+    emptyIn:"Nothing under “{f}” just yet, which doesn't mean we can't make it. Message us and tell us what you're after.",
     filterLabel:"Filter designs",
     typeFilterLabel:"Filter by type",
     photoPrev:"Previous photo",
@@ -2002,10 +1964,12 @@ function paintSizes(){
   var hint = document.getElementById("mmHint");
   if (!input) return;
   var raw = input.value.trim();
-  if (raw === ""){ out.textContent = "—"; hint.textContent = ""; return; }
+  /* empty rather than a placeholder glyph: it must never look like a zero,
+     and session 5 took every em dash off the page including this one */
+  if (raw === ""){ out.textContent = ""; hint.textContent = ""; return; }
   var mm = parseFloat(raw.replace(",", "."));
   if (!isFinite(mm) || mm < 30 || mm > 120){
-    out.textContent = "—";
+    out.textContent = "";
     hint.textContent = LANG === "ar"
       ? "المقاسات الطبيعية بين ٣٠ و١٢٠ مليمتر. راجع القياس."
       : "Normal measurements fall between 30 and 120 mm. Check the measurement.";
@@ -2042,17 +2006,6 @@ document.getElementById("moreBtn").addEventListener("click", function(){
    catalogue, not the first twelve. */
 window.addEventListener("beforeprint", function(){
   if (!isFiltered() && revealed < DESIGNS.length){ revealed = DESIGNS.length; renderGrid(); }
-});
-
-/* Entry cards: pre-apply one design filter and scroll to the grid. Not a
-   section split — a hard gender split would force every piece into a bucket,
-   and most of the catalogue genuinely isn't gendered. */
-Array.prototype.forEach.call(document.querySelectorAll("[data-entry]"), function(b){
-  b.addEventListener("click", function(){
-    FILTER = b.getAttribute("data-entry");
-    TFILTER = "all";
-    afterPick();
-  });
 });
 
 if (FACEBOOK_URL){
@@ -2100,7 +2053,7 @@ setLang(readInitialLang(), false);
     "areaServed":"EG",
     "makesOffer":[
       {"@type":"Offer","itemOffered":{"@type":"Service","name":"Custom making","alternateName":"تصنيع حسب الطلب"}},
-      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Silver repair","alternateName":"تصليح الفضة"}},
+      {"@type":"Offer","itemOffered":{"@type":"Service","name":"Repair","alternateName":"تصليح"}},
       {"@type":"Offer","itemOffered":{"@type":"Service","name":"Polishing","alternateName":"تلميع"}},
       {"@type":"Offer","itemOffered":{"@type":"Service","name":"Stone setting","alternateName":"تركيب أحجار"}}
     ]
