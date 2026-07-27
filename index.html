@@ -1178,8 +1178,8 @@ var WA_NUMBER = "201149030164";
 var TEL = "+201149030164";
 
 /* Two orthogonal axes per item:
-     types      — what it is:  rings pendants necklaces bracelets keychains
-                               cufflinks pins beads
+     types      — what it is:  rings pendants necklaces earrings bracelets
+                               anklets keychains cufflinks tieclips pins beads
      categories — what it looks like: names pharaonic mens womens clubs couples
    An item can carry several of each; filters are AND across the axes and OR
    within one. `img` is normally one path (the -400 and .webp variants are
@@ -1192,25 +1192,45 @@ var DESIGNS = [
     alt_ar:"مجموعة دلايات جعران فضة مترصعة بالفيروز واللازورد والمرجان",
     alt_en:"A group of silver scarab pendants inlaid with turquoise, lapis and coral" },
 
-  { id:"eb-002", img:"assets/designs/eb-002", types:["rings"], categories:["mens","names"],
-    title_ar:"خاتم رجالي باسم عربي", title_en:"Men's signet ring with an Arabic name",
-    alt_ar:"خاتم رجالي فضة بفص أسود عليه اسم عربي بارز، وجوانب منقوشة",
-    alt_en:"A men's silver signet ring with a raised Arabic name on a black face and engraved shoulders" },
+  { id:"eb-051", img:"assets/designs/eb-051", types:["rings"], categories:["names","couples"],
+    title_ar:"دبل متطابقة بنقش عربي", title_en:"Matching bands engraved in Arabic",
+    alt_ar:"خاتمين متطابقين، واحد فضة وواحد ذهبي، منقوش عليهم نفس العبارة بالعربي",
+    alt_en:"Two matching bands, one silver and one gold, engraved with the same Arabic phrase" },
 
   { id:"eb-013", img:"assets/designs/eb-013", types:["pendants"], categories:["names","couples","womens"],
     title_ar:"دلاية اسم عربي بخط منساب", title_en:"Arabic name pendant in flowing script",
     alt_ar:"دلاية فضة باسم عربي بخط منساب، معروضة في علبة هدية سودا",
     alt_en:"A silver pendant of an Arabic name in flowing script, shown in a black gift box" },
 
-  { id:"eb-041", img:"assets/designs/eb-041", types:["cufflinks"], categories:["names","mens"],
-    title_ar:"زراير قميص بالأسماء", title_en:"Name cufflinks",
-    alt_ar:"زوجين زراير قميص فضة، كل زوج عليه اسم عربي بخط منساب",
-    alt_en:"Two pairs of silver cufflinks, each pair engraved with an Arabic name in flowing script" },
+  { id:"eb-048", img:"assets/designs/eb-048", types:["pendants"], categories:["pharaonic"],
+    title_ar:"دلاية عين حورس", title_en:"Eye of Horus pendant",
+    alt_ar:"دلاية عين حورس ذهبي مفرغة، بحجر أزرق صغير في النص",
+    alt_en:"An openwork gold Eye of Horus pendant with a small blue stone at its centre" },
+
+  { id:"eb-002", img:"assets/designs/eb-002", types:["rings"], categories:["mens","names"],
+    title_ar:"خاتم رجالي باسم عربي", title_en:"Men's signet ring with an Arabic name",
+    alt_ar:"خاتم رجالي فضة بفص أسود عليه اسم عربي بارز، وجوانب منقوشة",
+    alt_en:"A men's silver signet ring with a raised Arabic name on a black face and engraved shoulders" },
 
   { id:"eb-030", img:"assets/designs/eb-030", types:["pendants"], categories:["pharaonic"],
     title_ar:"مفاتيح الحياة بالتطعيم", title_en:"Ankh pendants with stone inlay",
     alt_ar:"صفوف دلايات مفتاح الحياة فضة، مطعمة بالفيروز واللازورد والمرجان",
     alt_en:"Rows of silver ankh pendants inlaid with turquoise, lapis and coral" },
+
+  { id:"eb-056", img:"assets/designs/eb-056", types:["bracelets"], categories:["names","womens"],
+    title_ar:"أسورة باسم عربي وحبة لؤلؤ", title_en:"Arabic name bangle with a pearl",
+    alt_ar:"أسورة ذهبي مفتوحة على شكل اسم عربي بخط منساب، وفي طرفها حبة لؤلؤ",
+    alt_en:"An open gold bangle shaped as an Arabic name in flowing script, finished with a pearl" },
+
+  { id:"eb-041", img:"assets/designs/eb-041", types:["cufflinks"], categories:["names","mens"],
+    title_ar:"زراير قميص بالأسماء", title_en:"Name cufflinks",
+    alt_ar:"زوجين زراير قميص فضة، كل زوج عليه اسم عربي بخط منساب",
+    alt_en:"Two pairs of silver cufflinks, each pair engraved with an Arabic name in flowing script" },
+
+  { id:"eb-052", img:"assets/designs/eb-052", types:["rings"], categories:["names"],
+    title_ar:"خواتم بأسماء متعددة", title_en:"Stacked rings with several names",
+    alt_ar:"تلات خواتم مفتوحة بتلات طبقات، منقوش على كل طبقة اسم، بألوان فضة وذهبي ووردي",
+    alt_en:"Three open three-band rings, each band engraved with a name, in silver, gold and rose finishes" },
 
   { id:"eb-017", img:"assets/designs/eb-017", types:["bracelets"], categories:["names","womens"],
     title_ar:"أسورة باسم مفرغ", title_en:"Cut-out name bracelet",
@@ -1221,6 +1241,11 @@ var DESIGNS = [
     title_ar:"خرطوش فرعوني بالاسم", title_en:"Pharaonic cartouche pendant",
     alt_ar:"دلايتين خرطوش فرعوني، واحدة فضة وواحدة ذهبي، منقوش عليهم هيروغليفي",
     alt_en:"Two pharaonic cartouche pendants, one silver and one gold, engraved with hieroglyphs" },
+
+  { id:"eb-057", img:"assets/designs/eb-057", types:["earrings"], categories:["womens"],
+    title_ar:"حلق على شكل غصن ورق", title_en:"Leaf-spray earrings",
+    alt_ar:"زوجين حلق على شكل غصن ورق، زوج ذهبي وزوج فضة، على خلفية فاتحة",
+    alt_en:"Two pairs of leaf-spray earrings, one gold and one silver, on a pale background" },
 
   { id:"eb-045", img:"assets/designs/eb-045", types:["keychains"], categories:["names"],
     title_ar:"ميدالية اسم عربي بخط منساب", title_en:"Arabic name keyring in flowing script",
@@ -1237,6 +1262,11 @@ var DESIGNS = [
     alt_ar:"خاتم رجالي فضة بحجر أسود بيضاوي كبير وجسم مجدول",
     alt_en:"A men's silver ring with a large oval black stone and a braided band" },
 
+  { id:"eb-049", img:"assets/designs/eb-049", types:["pendants"], categories:["pharaonic"],
+    title_ar:"مفتاح الحياة", title_en:"Ankh pendant",
+    alt_ar:"دلاية مفتاح الحياة ذهبي بسطح لامع، على سطح خشب",
+    alt_en:"A polished gold ankh pendant on a wooden surface" },
+
   { id:"eb-008", img:"assets/designs/eb-008", types:["pendants"], categories:["names","couples","womens"],
     title_ar:"دلاية بشكل وكلمة على ذوقك", title_en:"Silhouette pendant with your own words",
     alt_ar:"دلاية فضة مفرغة على شكل أم وبنتها، وتحتها كلمة بخط عربي",
@@ -1247,6 +1277,11 @@ var DESIGNS = [
     alt_ar:"دلايات فضة على شكل زهرة اللوتس وصقر حورس، مطعمة بالفيروز واللازورد",
     alt_en:"Silver pendants shaped as lotus flowers and Horus falcons, inlaid with turquoise and lapis" },
 
+  { id:"eb-054", img:"assets/designs/eb-054", types:["bracelets"], categories:["couples"],
+    title_ar:"أسورة مفتوحة بلونين", title_en:"Two-tone open bangle",
+    alt_ar:"أسورة مفتوحة رفيعة، طرف ذهبي وطرف فضة، على خلفية رمادي فاتح",
+    alt_en:"A slim open bangle with one gold end and one silver end, on a pale grey background" },
+
   { id:"eb-025", img:"assets/designs/eb-025", types:["cufflinks"], categories:["names","mens"],
     title_ar:"زراير قميص بخط عربي", title_en:"Arabic calligraphy cufflinks",
     alt_ar:"زوج زراير قميص فضة مربعة بخط عربي مفرغ",
@@ -1256,6 +1291,11 @@ var DESIGNS = [
     title_ar:"دبل الشمس والقمر", title_en:"Sun and moon pair of rings",
     alt_ar:"خاتمين فضة رفيعين، واحد عليه شمس والتاني عليه هلال",
     alt_en:"Two slim silver rings, one with a sun motif and one with a crescent moon" },
+
+  { id:"eb-053", img:"assets/designs/eb-053", types:["rings"], categories:["names"],
+    title_ar:"خاتم عريض بالاسم", title_en:"Wide band with an engraved name",
+    alt_ar:"خاتم ذهبي عريض محفور عليه اسم بحروف إنجليزي، في صباع إيد",
+    alt_en:"A wide gold band engraved with a name in Latin letters, worn on a finger" },
 
   { id:"eb-020", img:"assets/designs/eb-020", types:["pendants","necklaces"], categories:["names","womens"],
     title_ar:"دلاية مستطيلة بخط عربي بارز", title_en:"Rectangular plaque pendant in raised Arabic script",
@@ -1272,6 +1312,11 @@ var DESIGNS = [
     alt_ar:"خاتم رجالي فضة بوش أسود دائري مكتوب عليه اسم بحروف إنجليزي",
     alt_en:"A men's silver signet ring with a round black face and a name in Latin letters" },
 
+  { id:"eb-058", img:"assets/designs/eb-058", types:["anklets"], categories:["womens"],
+    title_ar:"خلخال بتعليقات صغيرة", title_en:"Anklet with small charms",
+    alt_ar:"خلخال فضة من سلسلتين بتعليقات صغيرة، في رجل على الرملة",
+    alt_en:"A silver two-strand anklet with small charms, worn on sand" },
+
   { id:"eb-003", img:"assets/designs/eb-003", types:["keychains"], categories:["names"],
     title_ar:"ميدالية اسم عربي مفرغ", title_en:"Cut-out Arabic name keyring",
     alt_ar:"ميدالية مفاتيح فضة دائرية باسم عربي مفرغ بخط متشابك",
@@ -1287,6 +1332,11 @@ var DESIGNS = [
     alt_ar:"دلايات فضة على شكل قناع فرعوني وجعران، بخلفيات فيروز ومرجان",
     alt_en:"Silver pendants shaped as a pharaonic mask and scarabs, on turquoise and coral backings" },
 
+  { id:"eb-050", img:"assets/designs/eb-050", types:["pendants"], categories:["pharaonic","womens"],
+    title_ar:"دلاية نفرتيتي", title_en:"Nefertiti pendant",
+    alt_ar:"دلاية على شكل رأس نفرتيتي ذهبي بتفاصيل التاج، على سطح خشب",
+    alt_en:"A gold Nefertiti head pendant with a detailed crown, on a wooden surface" },
+
   { id:"eb-005", img:"assets/designs/eb-005", types:["rings"], categories:["clubs","mens"],
     title_ar:"خاتم بشعار النادي", title_en:"Club crest ring",
     alt_ar:"خاتم فضة رجالي بشعار نادي كرة قدم بالمينا الحمراء والسودا",
@@ -1296,6 +1346,11 @@ var DESIGNS = [
     title_ar:"دلاية حلقات متداخلة بالأسماء", title_en:"Interlocking rings pendant",
     alt_ar:"دلاية فضة من تلات حلقات متداخلة، كل حلقة منقوش عليها اسم",
     alt_en:"A silver pendant of three interlocking rings, each engraved with a name" },
+
+  { id:"eb-055", img:"assets/designs/eb-055", types:["tieclips"], categories:["names","mens"],
+    title_ar:"مشابك كرافت بالنقش", title_en:"Engraved tie clips",
+    alt_ar:"تلات مشابك كرافت منقوش عليها أسماء وتواريخ، بألوان فضة وذهبي ووردي",
+    alt_en:"Three tie clips engraved with names and dates, in silver, gold and rose finishes" },
 
   { id:"eb-043", img:"assets/designs/eb-043", types:["keychains"], categories:["couples","names"],
     title_ar:"ميدالية بإهداء محفور", title_en:"Keyring with an engraved message",
@@ -1316,6 +1371,11 @@ var DESIGNS = [
     title_ar:"دلاية مربعة بخط كوفي", title_en:"Square pendant in Kufic script",
     alt_ar:"دلاية فضة مربعة بخط كوفي هندسي، على سلسلة رفيعة",
     alt_en:"A square silver pendant in geometric Kufic script, on a fine chain" },
+
+  { id:"eb-059", img:"assets/designs/eb-059", types:["rings"], categories:["couples"],
+    title_ar:"خاتم الإيدين المتعانقة", title_en:"Embracing hands ring",
+    alt_ar:"خاتم فضة مفتوح على شكل إيدين متعانقتين، في صباع إيد",
+    alt_en:"An open silver ring shaped as two embracing hands, worn on a finger" },
 
   { id:"eb-046", img:"assets/designs/eb-046", types:["keychains"], categories:["mens"],
     title_ar:"ميدالية بفص أسود سادة", title_en:"Plain black-stone keyring",
@@ -1341,6 +1401,11 @@ var DESIGNS = [
     title_ar:"ميدالية مفاتيح بالنقش", title_en:"Engraved keyring",
     alt_ar:"ميدالية مفاتيح فضة فيها لوح منقوش وقرصين صغيرين",
     alt_en:"A silver keyring with an engraved bar and two small discs" },
+
+  { id:"eb-060", img:"assets/designs/eb-060", types:["pins"], categories:["names"],
+    title_ar:"دبوس طويل بحرف", title_en:"Initial stick pin",
+    alt_ar:"دبوس كرافت طويل عليه حرف بخط منساب مرصع بأحجار صغيرة، على قماش كحلي",
+    alt_en:"A long stick pin topped with an initial in flowing script set with small stones, on navy cloth" },
 
   { id:"eb-042", img:"assets/designs/eb-042", types:["cufflinks"], categories:["names","mens"],
     title_ar:"زراير قميص باسم على وش أسود", title_en:"Name cufflinks on a black face",
@@ -1431,9 +1496,12 @@ var TYPES = [
   { key:"rings",     ar:"خواتم",       en:"Rings" },
   { key:"pendants",  ar:"دلايات",      en:"Pendants" },
   { key:"necklaces", ar:"سلاسل",       en:"Necklaces" },
+  { key:"earrings",  ar:"حلق",         en:"Earrings" },
   { key:"bracelets", ar:"أساور",       en:"Bracelets" },
+  { key:"anklets",   ar:"خلاخيل",      en:"Anklets" },
   { key:"keychains", ar:"ميداليات",    en:"Keychains" },
   { key:"cufflinks", ar:"زراير قميص",  en:"Cufflinks" },
+  { key:"tieclips",  ar:"مشابك كرافت", en:"Tie clips" },
   { key:"pins",      ar:"دبابيس",      en:"Pins" },
   { key:"beads",     ar:"مسابح",       en:"Prayer beads" }
 ];
